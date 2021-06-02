@@ -1,0 +1,67 @@
+@import '~antd/dist/antd.css';
+
+* {
+	margin: 0;
+	padding: 0;
+}
+.body_fi {
+	height: 100vh;
+	font-family: Arial, Helvetica, sans-serif;
+
+	background-image: linear-gradient(
+		to top,
+		#4fb576 0%,
+		#44c489 30%,
+		#28a9ae 46%,
+		#28a2b7 59%,
+		#4c7788 71%,
+		#6c4f63 86%,
+		#432c39 100%
+	);
+}
+.conatiner {
+	display: flex;
+	justify-content: center;
+	padding-top: 15rem;
+
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px;
+}
+
+.btn-fish {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-left: 20rem;
+	padding-top: 5rem;
+}
+tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.tg td {
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+.tg th {
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+.tg .tg-0pky {
+	border-color: inherit;
+	text-align: left;
+	vertical-align: top;
+}
