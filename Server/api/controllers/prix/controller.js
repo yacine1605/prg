@@ -18,7 +18,18 @@ const addData = async (req, res) => {
 		console.log('Error ');
 	}
 };
-
+const getdata = async (req, res) => {
+	try {
+		const datas = await Prix.find();
+		res.status(200).json({
+			message: 'Fetched successfully',
+			data: datas,
+		});
+	} catch (error) {
+		console.log('Error ');
+	}
+};
 module.exports = {
 	addData,
+	getdata,
 };

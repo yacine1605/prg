@@ -7,7 +7,6 @@ const prixSchema = new Schema(
 	{
 		Allache: {
 			Production: { type: String },
-
 			prix_debarquement: {
 				debarquemeent_min: {
 					type: String,

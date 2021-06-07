@@ -222,7 +222,7 @@ const Table = () => {
 										name="destination"
 										placeholder="enter a number"
 										style={{ paddingBottom: '25px' }}
-									></Input>
+									/>
 								</td>
 							</tr>
 						</tbody>
@@ -238,8 +238,7 @@ const Table = () => {
 					}}
 					type="primary"
 					onClick={() => {
-						submit();
-
+						submit(initialState);
 						postData();
 					}}
 				>
