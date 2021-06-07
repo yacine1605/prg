@@ -1,21 +1,28 @@
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
+import {
+	MenuUnfoldOutlined,
+	MenuFoldOutlined,
+	UserOutlined,
+	VideoCameraOutlined,
+	UploadOutlined,
+} from '@ant-design/icons';
+
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import fond from '../fond.png';
 import axios from 'axios';
 import './login.css';
 import { Input, Button, Card, Typography } from 'antd';
 
 const { Title } = Typography;
-
- const { Header, Content, Footer } = Layout;
-
-const Lay= () => {
-    const [form, setForm] = useState({
+const { SubMenu } = Menu;
+const { Header, Content, Footer, Sider } = Layout;
+const Lay = () => {
+	const [form, setForm] = useState({
 		username: '',
 		password: '',
 	});
-   
-    
+
 	const history = useHistory();
 	const submit = async () => {
 		const loginResponse = await axios
@@ -47,97 +54,117 @@ const Lay= () => {
 		intermediateState[e.target.name] = e.target.value;
 		setForm({ ...intermediateState });
 	};
-    return (
-        <di>
-        <Layout>
-    <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-     
-      <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-      <div className="body">
-			<Title level={2} className="title" style={{}}>
-				Marhba{' '}
-			</Title>
-			<div className="FormLogin">
-				<form onSubmit={(e) => e.preventDefault()}>
-					<div className="container">
-						<Card
-							style={{
-								boxShadow: ' rgba(0, 0, 0, 0.35) 0px 5px 15px',
-								backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
-								width: '300px',
-								height: '300px',
-							}}
-							title="Login"
-							level={4}
-							bordered={true}
-						>
-							<label>
-								<b>Username</b>
-							</label>
-							<Input
-                            style={{ backgroundImage: ' linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)' }}
-								name="username"
-								type="text"
-								placeholder="Enter Username"
-								required
-								onChange={(e) => {
-									handel(e);
+	const [collapsed, setCollapsed] = useState(false);
+	return (
+		<div>
+			<Layout>
+				<Header className="site-layout-background" style={{ padding: 0 }}></Header>
+				<Sider width={200} className="site-layout-background">
+					<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+						<SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
+							<Menu.Item
+								key="1"
+								onClick={() => {
+									history.push('/data');
 								}}
-							/>
-
-							<label htmlFor="psw">
-								<b>Password</b>
-							</label>
-							<Input
-								style={{ backgroundImage: ' linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)' }}
-								type="password"
-								name="password"
-								placeholder="Enter Password"
-								required
-								onChange={(e) => {
-									handel(e);
+							>
+								Graphs
+							</Menu.Item>
+							<Menu.Item
+								key="2"
+								onClick={() => {
+									history.push('/contact');
 								}}
-							/>
-
-							<div>
-								<Button
-									style={{
-										marginTop: '10%',
-										display: 'flex',
-										justifyContent: 'center',
-										alignItem: 'center',
-									}}
-									type="primary"
-									onClick={() => {
-										submit();
-									}}
-								>
-									Login
-								</Button>
+							>
+								Contact
+							</Menu.Item>
+							<Menu.Item key="3">option3</Menu.Item>
+							<Menu.Item key="4">option4</Menu.Item>
+						</SubMenu>
+					</Menu>
+				</Sider>
+				<Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+					<div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+						<div className="body">
+							<div className="logo" style={{ paddingLeft: '1.5%' }}>
+								<img src={fond} alt="logo" />
 							</div>
-						</Card>
+							<Title level={2} className="title" style={{}}></Title>
+							<div className="FormLogin">
+								<form onSubmit={(e) => e.preventDefault()}>
+									<div className="container">
+										<Card
+											style={{
+												boxShadow: ' rgba(0, 0, 0, 0.35) 0px 5px 15px',
+												backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
+												width: '300px',
+												height: '300px',
+											}}
+											title="Login"
+											level={4}
+											bordered={true}
+										>
+											<label>
+												<b>Username</b>
+											</label>
+											<Input
+												style={{
+													backgroundImage:
+														' linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)',
+												}}
+												name="username"
+												type="text"
+												placeholder="Enter Username"
+												required
+												onChange={(e) => {
+													handel(e);
+												}}
+											/>
+
+											<label htmlFor="psw">
+												<b>Password</b>
+											</label>
+											<Input
+												style={{
+													backgroundImage:
+														' linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)',
+												}}
+												type="password"
+												name="password"
+												placeholder="Enter Password"
+												required
+												onChange={(e) => {
+													handel(e);
+												}}
+											/>
+
+											<div>
+												<Button
+													style={{
+														marginTop: '10%',
+														display: 'flex',
+														justifyContent: 'center',
+														alignItem: 'center',
+													}}
+													type="primary"
+													onClick={() => {
+														submit();
+													}}
+												>
+													Login
+												</Button>
+											</div>
+										</Card>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
-				</form>
-			</div>
+				</Content>
+				<Footer style={{ textAlign: 'center' }}></Footer>
+			</Layout>
 		</div>
-      </div>
-    </Content>
-    <Footer style={{ textAlign: 'center' }}></Footer>
-  </Layout>
-  </di>
-    )
-}
+	);
+};
 
-export default Lay
-
-
-
-
+export default Lay;

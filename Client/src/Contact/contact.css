@@ -1,0 +1,24 @@
+@import '~antd/dist/antd.css';
+* {
+	margin: 0;
+	padding: 0;
+}
+.all {
+	height: 150vh;
+	background-image: linear-gradient(135deg, #81ffef 10%, #f067b4 100%);
+}
+
+.body_contact {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.logo {
+	padding-bottom: 10%;
+}
+.fish {
+	width: 10%;
+	height: 1px;
+	margin-top: 10%;
+}

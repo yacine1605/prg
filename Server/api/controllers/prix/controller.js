@@ -6,7 +6,6 @@ const addData = async (req, res) => {
 	try {
 		const newData = new Prix({
 			Allache,
-
 			destination,
 		});
 		await newData.save();

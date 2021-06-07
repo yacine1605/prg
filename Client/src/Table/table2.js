@@ -9,7 +9,7 @@ import { Input, Button, Typography } from 'antd';
 const { Title } = Typography;
 
 const Table = () => {
-	let initialState = {
+	const initialState = {
 		Allache: {
 			Production: '',
 			prix_debarquement: {
@@ -35,7 +35,7 @@ const Table = () => {
 	const history = useHistory();
 	const { data } = location.state;
 
-	const [datas, setdata] = useState('');
+	const [datas, setdata] = useState();
 
 	const postData = async () => {
 		const { datas } = await axios.post('http://localhost:5000/prix/', initialState);
@@ -56,7 +56,7 @@ const Table = () => {
 		setForm({ ...intermediateState });
 		console.log(intermediateState);
 	};
-	const submit = () => {
+	/*const submit = () => {
 		initialState.Allache.Production = form.Allache.Production;
 		initialState.Allache.prix_debarquement.debarquemeent_min = form.Allache.prix_debarquement.debarquemeent_min;
 		initialState.Allache.prix_debarquement.debarquemeent_moy = form.Allache.prix_debarquement.debarquemeent_moy;
@@ -64,9 +64,9 @@ const Table = () => {
 		initialState.Allache.prix_consommation.consommation_min = form.Allache.prix_consommation.consommation_min;
 		initialState.Allache.prix_consommation.consommation_max = form.Allache.prix_consommation.consommation_max;
 		initialState.Allache.prix_consommation.consommation_moy = form.Allache.prix_consommation.consommation_moy;
+		setForm(initialState);
 		console.log(form);
-		setForm();
-	};
+	};*/
 
 	return (
 		<div className="body_tab">
@@ -238,8 +238,10 @@ const Table = () => {
 					}}
 					type="primary"
 					onClick={() => {
-						submit(initialState);
-						postData();
+						//submit();
+						setForm(initialState);
+
+						//postData(initialState);
 					}}
 				>
 					submit
