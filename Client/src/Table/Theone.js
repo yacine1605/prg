@@ -83,7 +83,10 @@ const Theone = () => {
 			key: '0',
 			name: 'enter name ',
 			age: 'enter ',
-			address: '',
+			prix_deb: 'prix_deb',
+			prix_con: 'prix_con',
+			production: 'production',
+			address: 'addrese',
 		},
 		{ count: 0 },
 	];
@@ -107,20 +110,20 @@ const Theone = () => {
 			editable: true,
 		},
 		{
-			title: 'name',
-			dataIndex: 'name',
+			title: 'prix_deb',
+			dataIndex: 'prix_deb',
 
 			editable: true,
 		},
 		{
-			title: 'name',
-			dataIndex: 'name',
+			title: 'prix_con',
+			dataIndex: 'prix_con',
 
 			editable: true,
 		},
 		{
-			title: 'name',
-			dataIndex: 'name',
+			title: 'production',
+			dataIndex: 'production',
 
 			editable: true,
 		},
