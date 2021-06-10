@@ -1,4 +1,4 @@
-import Table from './Table/table2';
+import Table from './Table/Theone';
 import Login from './Login/Layout';
 import Fish from './fish/rubish';
 import Graph from './Graph/Graph';
