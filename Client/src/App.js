@@ -1,7 +1,7 @@
 import Table from './Table/Theone';
 import Login from './Login/Layout';
 import Fish from './fish/rubish';
-import Graph from './Graph/Graph';
+import Graph from './Graph/Graph2';
 import Accuile from './Accuile/Accuile';
 import Contact from './Contact/Contact';
 

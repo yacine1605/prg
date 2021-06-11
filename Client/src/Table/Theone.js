@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation /* useHistory */ } from 'react-router-dom';
 import axios from 'axios';
 
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
@@ -92,8 +92,7 @@ const Theone = () => {
 	];
 
 	const location = useLocation();
-	const history = useHistory();
-	const { data } = location.state;
+	//const history = useHistory();
 	const arr = [];
 	const [datas, setdata] = useState();
 	const [dataSource, setDatasource] = useState(init);
