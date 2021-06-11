@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useLocation /* useHistory */ } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
@@ -81,7 +81,7 @@ const Theone = () => {
 	const init = [
 		{
 			key: '0',
-			name: 'enter name ',
+			date: 'yyyy-mm-dd',
 			age: 'enter ',
 			prix_deb: 'prix_deb',
 			prix_con: 'prix_con',
@@ -90,9 +90,9 @@ const Theone = () => {
 		},
 		{ count: 0 },
 	];
-
 	const location = useLocation();
-	//const history = useHistory();
+	const history = useHistory();
+	const { data } = location.state;
 	const arr = [];
 	const [datas, setdata] = useState();
 	const [dataSource, setDatasource] = useState(init);
@@ -104,8 +104,8 @@ const Theone = () => {
 
 	const columns = [
 		{
-			title: 'name',
-			dataIndex: 'name',
+			title: 'date',
+			dataIndex: 'date',
 			editable: true,
 		},
 		{
@@ -199,7 +199,7 @@ const Theone = () => {
 
 	return (
 		<div>
-			<h1>dprh:</h1>
+			<h1>dprh:{data.data?.dprh}</h1>
 			<Button
 				onClick={(() => handleAdd(), arr.push(dataSource))}
 				type="primary"

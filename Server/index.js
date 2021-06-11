@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/user', userRouter);
 app.use('/port', portRouter);
 app.use('/prix', prixRouter);
-app.use('./infofish', infoRouter);
+app.use('/infofish', infoRouter);
 
 const PORT = process.env.PORT || 2000;
 

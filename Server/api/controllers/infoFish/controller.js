@@ -1,14 +1,15 @@
 const Info = require('../../../models/fish');
 
 const addInfo = async (req, res) => {
-	const { wilaya, port, nom, Poids, taille } = req.body;
+	const { date, wilaya, port, nom, poids, taille } = req.body;
 
 	try {
 		const newInfo = new Info({
+			date,
 			wilaya,
 			port,
 			nom,
-			Poids,
+			poids,
 			taille,
 		});
 		await newInfo.save();

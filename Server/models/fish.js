@@ -3,6 +3,9 @@ const { Schema } = mongoose;
 
 const infoSchema = new Schema(
 	{
+		date: {
+			type: String,
+		},
 		wilaya: {
 			type: String,
 		},
@@ -12,7 +15,7 @@ const infoSchema = new Schema(
 		nom: {
 			type: String,
 		},
-		Poids: {
+		poids: {
 			type: String,
 		},
 		taille: {
