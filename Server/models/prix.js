@@ -5,36 +5,18 @@ const { Schema } = mongoose;
 
 const prixSchema = new Schema(
 	{
-		Allache: {
-			Production: { type: String },
-			prix_debarquement: {
-				debarquemeent_min: {
-					type: String,
-				},
-				debarquemeent_moy: {
-					type: String,
-				},
-				debarquemeent_max: {
-					type: String,
-				},
-			},
-			prix_consommation: {
-				consommation_min: {
-					type: String,
-				},
-				consommation_moy: {
-					type: String,
-				},
-				consommation_max: {
-					type: String,
-				},
-			},
-		},
-
-		destination: {
-			type: String,
-		},
+		Destinastion: { type: String },
+		P_Consommation_max: { type: String },
+		P_Consommation_min: { type: String },
+		P_Consommation_moy: { type: String },
+		P_Debarquement_max: { type: String },
+		P_Debarquement_min: { type: String },
+		P_Debarquement_moy: { type: String },
+		date: { type: String },
+		nom: { type: String },
+		production: { type: String },
 	},
+
 	{ timestamps: true }
 );
 

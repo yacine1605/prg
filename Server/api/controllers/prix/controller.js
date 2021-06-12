@@ -1,12 +1,31 @@
 const Prix = require('../../../models/prix');
 
 const addData = async (req, res) => {
-	const { destination, Allache } = req.body;
+	const {
+		Destinastion,
+		P_Consommation_max,
+		P_Consommation_min,
+		P_Consommation_moy,
+		P_Debarquement_max,
+		P_Debarquement_min,
+		P_Debarquement_moy,
+		date,
+		nom,
+		production,
+	} = req.body;
 
 	try {
 		const newData = new Prix({
-			Allache,
-			destination,
+			Destinastion,
+			P_Consommation_max,
+			P_Consommation_min,
+			P_Consommation_moy,
+			P_Debarquement_max,
+			P_Debarquement_min,
+			P_Debarquement_moy,
+			date,
+			nom,
+			production,
 		});
 		await newData.save();
 		res.status(201).json({

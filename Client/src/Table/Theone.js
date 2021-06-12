@@ -256,7 +256,7 @@ const TableForm = ({ value, onChange }) => {
 	//	const { data } = location.state;
 
 	const postData = async () => {
-		const { datas } = await axios.post('http://localhost:5000/prix/', form);
+		const { datas } = await axios.post('http://localhost:5000/prix/fish', form);
 		setdata(datas);
 	};
 
@@ -283,9 +283,16 @@ const TableForm = ({ value, onChange }) => {
 		const newData = data?.map((item) => ({ ...item })) || [];
 		newData.push({
 			key: `NEW_TEMP_ID_${index}`,
-			workId: '',
-			name: '',
-			department: '',
+			/*	date: '',
+			Production: '',
+			P_Consommation_moy: '',
+			nom: '',
+			P_Consommation_max: '',
+			Destinastion: '',
+			P_Debarquement_min: '',
+			P_Debarquement_moy: '',
+			P_Debarquement_max: '',
+			P_Consommation_min: '',*/
 			editable: true,
 			isNew: true,
 		});
@@ -297,14 +304,12 @@ const TableForm = ({ value, onChange }) => {
 		console.log(form);
 		intermediateState[e.target.name] = e.target.value;
 		setForm({ ...intermediateState });
-		console.log(intermediateState);
 	};
 	const handelchoice = (e) => {
 		const intermediateState = { ...form };
 		console.log(form);
 		intermediateState[e.name] = e.value;
 		setForm({ ...intermediateState });
-		console.log(intermediateState);
 	};
 
 	const remove = (key) => {
@@ -408,7 +413,6 @@ const TableForm = ({ value, onChange }) => {
 						/*<Select name="poission" options={poission} onChange={(choice) => handel(choice)}></Select>*/
 					);
 				}
-
 				return text;
 			},
 		},
@@ -439,7 +443,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'Production',
+			title: 'production',
 			dataIndex: 'Production',
 			key: 'Production',
 
@@ -455,20 +459,19 @@ const TableForm = ({ value, onChange }) => {
 						/>
 					);
 				}
-
 				return text;
 			},
 		},
 		{
 			title: 'P.Debarquement.min',
-			dataIndex: 'P.Debarquement.min',
-			key: 'P.Debarquement.min',
+			dataIndex: 'P_Debarquement_min',
+			key: 'P_Debarquement_min',
 
 			render: (text, record) => {
 				if (record.editable) {
 					return (
 						<Input
-							name="P.Debarquement.min"
+							name="P_Debarquement_min"
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -476,24 +479,64 @@ const TableForm = ({ value, onChange }) => {
 						/>
 					);
 				}
-
 				return text;
 			},
 		},
 		{
 			title: 'P.Debarquement.moy',
-			dataIndex: 'P.Debarquement.moy',
-			key: 'P.Debarquement.moy',
+			dataIndex: 'P_Debarquement_moy',
+			key: 'P_Debarquement_moy',
 
 			render: (text, record) => {
 				if (record.editable) {
 					return (
 						<Input
-							name="P.Debarquement.moy"
+							name="P_Debarquement_moy"
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="P.Debarquement.moy"
+							placeholder="P_Debarquement_moy"
+						/>
+					);
+				}
+				return text;
+			},
+		},
+		{
+			title: 'P_Debarquement_max',
+			dataIndex: 'P_Debarquement_max',
+			key: 'P_Debarquement_max',
+
+			render: (text, record) => {
+				if (record.editable) {
+					return (
+						<Input
+							name="P_Debarquement_max"
+							value={text}
+							onChange={(e) => handel(e)}
+							onKeyPress={(e) => handleKeyPress(e, record.key)}
+							placeholder="P_Debarquement_max"
+						/>
+					);
+				}
+
+				return text;
+			},
+		},
+
+		{
+			title: 'P_Consommation_min',
+			dataIndex: 'P_Consommation_min',
+			key: 'P_Consommation_min',
+			render: (text, record) => {
+				if (record.editable) {
+					return (
+						<Input
+							name="P_Consommation_min"
+							value={text}
+							onChange={(e) => handel(e)}
+							onKeyPress={(e) => handleKeyPress(e, record.key)}
+							placeholder="P_Consommation_min"
 						/>
 					);
 				}
@@ -502,40 +545,19 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P.Debarquement.max',
-			dataIndex: 'P.Debarquement.max',
-			key: 'P.Debarquement.max',
+			title: 'P_Consommation_moy',
+			dataIndex: 'P_Consommation_moy',
+			key: 'P_Consommation_moy',
 
 			render: (text, record) => {
 				if (record.editable) {
 					return (
 						<Input
-							name="P.Debarquement.max"
+							name="P_Consommation_moy"
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="P.Debarquement.max"
-						/>
-					);
-				}
-
-				return text;
-			},
-		},
-
-		{
-			title: 'P.Consommation.min',
-			dataIndex: 'P.Consommation.min',
-			key: 'P.Consommation.min',
-			render: (text, record) => {
-				if (record.editable) {
-					return (
-						<Input
-							name="P.Consommation.min"
-							value={text}
-							onChange={(e) => handel(e)}
-							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="P.Consommation.min"
+							placeholder="P_Consommation_moy"
 						/>
 					);
 				}
@@ -544,38 +566,17 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P.Consommation.moy',
-			dataIndex: 'P.Consommation.moy',
-			key: 'P.Consommation.moy',
-
+			title: 'P_Consommation_max',
+			dataIndex: 'P_Consommation_max',
+			key: 'P_Consommation_max',
 			render: (text, record) => {
 				if (record.editable) {
 					return (
 						<Input
-							name="P.Consommation.moy"
-							value={text}
-							onChange={(e) => handel(e)}
-							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="P.Consommation.moy"
-						/>
-					);
-				}
-
-				return text;
-			},
-		},
-		{
-			title: 'P.Consommation.max',
-			dataIndex: 'P.Consommation.max',
-			key: 'P.Consommation.max',
-			render: (text, record) => {
-				if (record.editable) {
-					return (
-						<Input
-							name="P.Consommation.max"
+							name="P_Consommation_max"
 							value={text}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="P.Consommation.max"
+							placeholder="P_Consommation_max"
 							onChange={(e) => handel(e)}
 						/>
 					);
@@ -585,18 +586,18 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'Distinastion',
-			dataIndex: 'Distinastion',
-			key: 'Distinastion',
+			title: 'Destinastion',
+			dataIndex: 'Destinastion',
+			key: 'Destinastion',
 			render: (text, record) => {
 				if (record.editable) {
 					return (
 						<Input
-							name="Distinastion"
+							name="Destinastion"
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="Distinastion"
+							placeholder="Destinastion"
 						/>
 					);
 				}
@@ -674,6 +675,9 @@ const TableForm = ({ value, onChange }) => {
 			>
 				<PlusOutlined />
 				Ajouter Data
+			</Button>
+			<Button type="primary" onClick={() => postData()}>
+				Submit
 			</Button>
 		</>
 	);
