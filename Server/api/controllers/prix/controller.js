@@ -1,19 +1,13 @@
+const e = require('express');
 const Prix = require('../../../models/prix');
 
 const addData = async (req, res) => {
-	const {
-		Destinastion,
-		P_Consommation_max,
-		P_Consommation_min,
-		P_Consommation_moy,
-		P_Debarquement_max,
-		P_Debarquement_min,
-		P_Debarquement_moy,
-		date,
-		nom,
-		production,
-	} = req.body;
-
+	const { arr } = req.body;
+	let element;
+	for (let i = 1; i < arr.length; i++) {
+		element = arr[i];
+	}
+	console.log(element);
 	try {
 		const newData = new Prix({
 			Destinastion,
@@ -33,7 +27,7 @@ const addData = async (req, res) => {
 			data: newData,
 		});
 	} catch (error) {
-		console.log('Error ');
+		console.log('Error nigger');
 	}
 };
 const getdata = async (req, res) => {

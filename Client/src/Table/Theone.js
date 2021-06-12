@@ -22,7 +22,7 @@ const TableForm = ({ value, onChange }) => {
 	//	const { data } = location.state;
 
 	const postData = async () => {
-		const { datas } = await axios.post('http://localhost:5000/prix/fish', form);
+		const { datas } = await axios.post('http://localhost:5000/prix/fish', arr);
 		setdata(datas);
 	};
 
@@ -443,7 +443,11 @@ const TableForm = ({ value, onChange }) => {
 				<PlusOutlined />
 				Ajouter Data
 			</Button>
-			<Button type="primary" onClick={() => setArr([...arr, arr.push(form)], console.log(arr))}>
+			<Button
+				type="primary"
+				onClick={() => setArr([...arr, arr.push(form)], console.log(arr))}
+				onClick={() => postData()}
+			>
 				Submit
 			</Button>
 		</>
