@@ -3,11 +3,10 @@ const Prix = require('../../../models/prix');
 
 const addData = async (req, res) => {
 	const { arr } = req.body;
-	let element;
 	for (let i = 1; i < arr.length; i++) {
-		element = arr[i];
+		const newData = arr[i];
+		console.log(newData);
 	}
-	console.log(element);
 	try {
 		const newData = new Prix({
 			Destinastion,

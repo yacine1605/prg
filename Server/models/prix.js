@@ -5,22 +5,18 @@ const { Schema } = mongoose;
 
 const prixSchema = new Schema(
 	{
-		arr: [
-			{ '': '' },
-			{
-				Destinastion: { type: String },
-				P_Consommation_max: { type: String },
-				P_Consommation_min: { type: String },
-				P_Consommation_moy: { type: String },
-				P_Debarquement_max: { type: String },
-				P_Debarquement_min: { type: String },
-				P_Debarquement_moy: { type: String },
-				date: { type: String },
-				nom: { type: String },
-				production: { type: String },
-			},
-		],
+		Destinastion: { type: String },
+		P_Consommation_max: { type: String },
+		P_Consommation_min: { type: String },
+		P_Consommation_moy: { type: String },
+		P_Debarquement_max: { type: String },
+		P_Debarquement_min: { type: String },
+		P_Debarquement_moy: { type: String },
+		date: { type: String },
+		nom: { type: String },
+		production: { type: String },
 	},
+
 	{ timestamps: true }
 );
 
