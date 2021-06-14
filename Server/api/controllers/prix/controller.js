@@ -2,24 +2,27 @@ const Prix = require('../../../models/prix');
 
 const addData = async (req, res) => {
 	const { arr } = req.body;
-	for (let i = 1; i < arr.length; i++) {
-		const newData = arr[i];
-		console.log(newData);
-	}
+	console.log(arr);
 	try {
-		const newData = new Prix({
-			Destinastion,
-			P_Consommation_max,
-			P_Consommation_min,
-			P_Consommation_moy,
-			P_Debarquement_max,
-			P_Debarquement_min,
-			P_Debarquement_moy,
-			date,
-			nom,
-			production,
-		});
-		await newData.save();
+		for (let i = 1; i < arr.length; i++) {
+			let element = arr[i];
+			let newData = new Prix({
+				port: element.port,
+				wilaya: element.wilaya,
+				Destinastion: element.Destinastion,
+				P_Consommation_max: element.P_Consommation_max,
+				P_Consommation_min: element.P_Consommation_min,
+				P_Consommation_moy: element.P_Consommation_moy,
+				P_Debarquement_max: element.P_Debarquement_max,
+				P_Debarquement_min: element.P_Debarquement_min,
+				P_Debarquement_moy: element.P_Debarquement_moy,
+				date: element.date,
+				nom: element.nom,
+				production: element.production,
+			});
+			await newData.save();
+		}
+
 		res.status(201).json({
 			message: 'data created',
 			data: newData,

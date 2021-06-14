@@ -5,6 +5,8 @@ const { Schema } = mongoose;
 
 const prixSchema = new Schema(
 	{
+		port: { type: String },
+		wilaya: { type: String },
 		Destinastion: { type: String },
 		P_Consommation_max: { type: String },
 		P_Consommation_min: { type: String },

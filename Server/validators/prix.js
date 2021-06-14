@@ -4,15 +4,21 @@ const joi = require('joi');
 module.exports = {
 	postprix: {
 		body: {
-			P_Consommation_max: joi.string().required(),
-			P_Consommation_min: joi.string().required(),
-			P_Consommation_moy: joi.string().required(),
-			P_Debarquement_max: joi.string().required(),
-			P_Debarquement_min: joi.string().required(),
-			P_Debarquement_moy: joi.string().required(),
-			date: joi.string().required(),
-			nom: joi.string().required(),
-			production: joi.string().required(),
+			arr: Joi.array().items(
+				Joi.object({
+					port: Joi.string().required(1),
+					date: Joi.string().required(1),
+					nom: Joi.string().required(1),
+					production: Joi.string().required(1),
+					wilaya: Joi.string().required(1),
+					P_Consommation_min: Joi.string().required(1),
+					P_Consommation_max: Joi.string().required(1),
+					P_Consommation_moy: Joi.string().required(1),
+					P_Debarquement_max: Joi.string().required(1),
+					P_Debarquement_min: Joi.string().required(1),
+					P_Debarquement_moy: Joi.string().required(1),
+				})
+			),
 		},
 	},
 };

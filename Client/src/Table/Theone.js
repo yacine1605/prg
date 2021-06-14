@@ -1,16 +1,12 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
 import { Layout } from 'antd';
-
 import { Typography } from 'antd';
-
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
-
 import styles from '../Table/style.less';
-
 const TableForm = ({ value, onChange }) => {
 	const { Header, Footer, Content } = Layout;
 	const { Title } = Typography;
@@ -18,17 +14,16 @@ const TableForm = ({ value, onChange }) => {
 	const [loading, setLoading] = useState(false);
 	const [index, setIndex] = useState(0);
 	const [cacheOriginData, setCacheOriginData] = useState({});
-	const [data, setData] = useState(value);
-
+	const [datam, setData] = useState(value);
 	const [datas, setdata] = useState();
 	const [form, setForm] = useState('');
-	const location = useLocation();
 	const [arr, setArr] = useState([]);
 	const history = useHistory();
-	//	const { data } = location.state;
+	const location = useLocation();
+	const { data } = location.state;
 
 	const postData = async () => {
-		const { datas } = await axios.post('http://localhost:5000/prix/fish', arr);
+		const { datas } = await axios.post('http://localhost:5000/prix/fish', { arr: arr });
 		setdata(datas);
 	};
 
@@ -36,7 +31,7 @@ const TableForm = ({ value, onChange }) => {
 
 	const toggleEditable = (e, key) => {
 		e.preventDefault();
-		const newData = data?.map((item) => ({ ...item }));
+		const newData = datam?.map((item) => ({ ...item }));
 		const target = getRowByKey(key, newData);
 
 		if (target) {
@@ -51,25 +46,15 @@ const TableForm = ({ value, onChange }) => {
 		}
 	};
 	const newMember = () => {
-		const newData = data?.map((item) => ({ ...item })) || [];
+		const newData = datam?.map((item) => ({ ...item })) || [];
 		newData.push({
 			key: `NEW_TEMP_ID_${index}`,
-			date: '',
-			Production: '',
-			P_Consommation_moy: '',
-			nom: '',
-			P_Consommation_max: '',
-			Destinastion: '',
-			P_Debarquement_min: '',
-			P_Debarquement_moy: '',
-			P_Debarquement_max: '',
-			P_Consommation_min: '',
+
 			editable: true,
 			isNew: true,
 		});
 		setIndex(index + 1);
 		setData(newData);
-
 		setArr([...arr, form]);
 		arr.push(form);
 		console.log(arr);
@@ -86,7 +71,7 @@ const TableForm = ({ value, onChange }) => {
 	};
 
 	const remove = (key) => {
-		const newData = data?.filter((item) => item.key !== key);
+		const newData = datam?.filter((item) => item.key !== key);
 		setData(newData);
 
 		if (onChange) {
@@ -137,7 +122,7 @@ const TableForm = ({ value, onChange }) => {
 			toggleEditable(e, key);
 
 			if (onChange) {
-				onChange(data);
+				onChange(datam);
 			}
 
 			setLoading(false);
@@ -153,7 +138,7 @@ const TableForm = ({ value, onChange }) => {
 	const cancel = (e, key) => {
 		setClickedCancel(true);
 		e.preventDefault();
-		const newData = [...data]; // 编辑前的原始数据
+		const newData = [...datam]; // 编辑前的原始数据
 
 		let cacheData = [];
 		cacheData = newData.map((item) => {
@@ -175,6 +160,45 @@ const TableForm = ({ value, onChange }) => {
 	const poission = [
 		{ value: 'Sardine', name: 'nom', label: 'Sardine' },
 		{ value: 'Poulpe', name: 'nom', label: 'Poulpe' },
+		{
+			value: 'cumcumbre de mer',
+			name: 'nom ',
+			label: 'cumcumbre de mer',
+		},
+	];
+	const wilaya = [
+		{
+			value: 'Ain Temouchent',
+			name: 'wilaya',
+			label: 'Ain Temouchent',
+		},
+		{ value: 'Alger', name: 'wilaya', label: 'Alger' },
+		{ value: 'Tipaza', name: 'wilaya', label: 'Tipaza' },
+		{ value: 'jijel', name: 'wilaya', label: 'jijel' },
+		{ value: 'Annaba', name: 'wilaya', label: 'Annaba' },
+		{ value: 'Bejaia', name: 'wilaya', label: 'Bejaia' },
+		{ value: 'Boumerdes', name: 'wilaya', label: 'Boumerdes' },
+		{ value: 'Chlef', name: 'wilaya', label: 'Chlef' },
+		{ value: 'El Tarf', name: 'wilaya', label: 'El Tarf' },
+		{ value: 'Mostaganem', name: 'wilaya', label: 'Mostaganem' },
+		{ value: 'Oran', name: 'wilaya', label: 'Oran' },
+		{ value: 'Skikda', name: 'wilaya', label: 'Skikda' },
+		{ value: 'Tizi ouzou', name: 'wilaya', label: 'Tizi ouzou' },
+		{ value: 'Tlemcen', name: 'wilaya', label: 'Tlemcen' },
+	];
+	const port = [
+		{ value: 'Beni-saf', name: 'port', label: 'Beni-saf' },
+		{ value: 'Bouzedjar', name: 'port', label: 'Bouzedjar' },
+		{ value: 'Alger', name: 'port', label: 'Alger' },
+		{ value: 'El Djamila', name: 'port', label: 'El Djamila' },
+		{ value: 'Tamentefoust', name: 'port', label: 'Tamentefoust' },
+		{ value: 'Annaba', name: 'port', label: 'Annaba' },
+		{ value: 'Chetaibi', name: 'port', label: 'Chetaibi' },
+		{ value: 'Béjaia', name: 'port', label: 'Béjaia' },
+		{ value: "Béni K'sila", name: 'port', label: "Béni K'sila" },
+		{ value: 'Dellys', name: 'port', label: 'Dellys' },
+		{ value: 'Djinet', name: 'port', label: 'Djinet' },
+		{ value: 'Zemmouri', name: 'port', label: 'Zemmouri' },
 	];
 
 	const columns = [
@@ -187,7 +211,7 @@ const TableForm = ({ value, onChange }) => {
 				if (record.editable) {
 					return (
 						<Input
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 							type="date"
 							autoFocus
 							/*	onChange={(e) => handleFieldChange(e, 'date', record.key)}*/
@@ -202,6 +226,52 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
+			title: <Title level={5}>wilaya</Title>,
+			dataIndex: 'wilaya',
+			key: 'wilaya',
+			render: (text, record) => {
+				if (record.editable) {
+					return (
+						/*<Input
+						value={text}
+						onChange={(e) => handleFieldChange(e, 'nom', record.key)}
+						onKeyPress={(e) => handleKeyPress(e, record.key)}
+						placeholder="工号"
+					/>*/
+						<Select
+							styles={{ fontSize: '20' }}
+							options={wilaya}
+							placeholder="wilaya"
+							value={text}
+							name="wilaya"
+							onChange={(choice) => handelchoice(choice)}
+						></Select>
+					);
+				}
+				return text;
+			},
+		},
+		{
+			title: <Title level={5}>port</Title>,
+			dataIndex: 'port',
+			key: 'port',
+			render: (text, record) => {
+				if (record.editable) {
+					return (
+						<Select
+							styles={{ fontSize: '20' }}
+							options={port}
+							placeholder="port"
+							value={text}
+							name="port"
+							onChange={(choice) => handelchoice(choice)}
+						></Select>
+					);
+				}
+				return text;
+			},
+		},
+		{
 			title: <Title level={5}>poission</Title>,
 			dataIndex: 'nom',
 			key: 'nom',
@@ -209,12 +279,6 @@ const TableForm = ({ value, onChange }) => {
 			render: (text, record) => {
 				if (record.editable) {
 					return (
-						/*<Input
-							value={text}
-							onChange={(e) => handleFieldChange(e, 'nom', record.key)}
-							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="工号"
-						/>*/
 						<Select
 							styles={{ fontSize: '20' }}
 							options={poission}
@@ -228,6 +292,7 @@ const TableForm = ({ value, onChange }) => {
 				return text;
 			},
 		},
+
 		{
 			title: <Title level={5}>production</Title>,
 			dataIndex: 'Production',
@@ -239,7 +304,7 @@ const TableForm = ({ value, onChange }) => {
 						<Input
 							name="production"
 							value={text}
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 							onChange={handel}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="Production"
@@ -258,7 +323,7 @@ const TableForm = ({ value, onChange }) => {
 				if (record.editable) {
 					return (
 						<Input
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 							name="P_Debarquement_min"
 							value={text}
 							onChange={(e) => handel(e)}
@@ -280,7 +345,7 @@ const TableForm = ({ value, onChange }) => {
 					return (
 						<Input
 							name="P_Debarquement_moy"
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -301,7 +366,7 @@ const TableForm = ({ value, onChange }) => {
 					return (
 						<Input
 							name="P_Debarquement_max"
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -323,7 +388,7 @@ const TableForm = ({ value, onChange }) => {
 					return (
 						<Input
 							name="P_Consommation_min"
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -349,7 +414,7 @@ const TableForm = ({ value, onChange }) => {
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="P_Consommation_moy"
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 						/>
 					);
 				}
@@ -370,7 +435,7 @@ const TableForm = ({ value, onChange }) => {
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="P_Consommation_max"
 							onChange={(e) => handel(e)}
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 						/>
 					);
 				}
@@ -391,7 +456,7 @@ const TableForm = ({ value, onChange }) => {
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="Destinastion"
-							style={{ fontSize: 12 }}
+							style={{ fontSize: 12, width: '80px' }}
 						/>
 					);
 				}
@@ -452,14 +517,17 @@ const TableForm = ({ value, onChange }) => {
 	return (
 		<>
 			<Layout>
-				<Header style={{ width: '105%' }}>header</Header>
-				<Layout style={{ border: '1px solid black' }}>
-					<Content style={{ border: '1px solid black', width: '105%' }}>
+				<Header style={{ width: '105%', color: 'white' }}>
+					<h1>dprh:{data?.data.dprh}</h1>
+					<h1>dprh:{data?.data.port}</h1>
+				</Header>
+				<Layout style={{ border: '1px solid black', width: '105%' }}>
+					<Content>
 						<div className="table">
 							<Table
 								loading={loading}
 								columns={columns}
-								dataSource={data}
+								dataSource={datam}
 								size={'small'}
 								pagination={false}
 								rowClassName={(record) => (record.editable ? styles.editable : '')}
@@ -484,8 +552,7 @@ const TableForm = ({ value, onChange }) => {
 				<Footer>
 					<Button
 						type="primary"
-						onClick={() => setArr([...arr, arr.push(form)], console.log(arr))}
-						onClick={() => postData()}
+						onClick={() => setArr([...arr, arr.push(form)], console.log(arr), postData())}
 					>
 						Submit
 					</Button>

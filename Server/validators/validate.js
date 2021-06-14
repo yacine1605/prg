@@ -3,8 +3,7 @@ const joi = require('joi');
 const validate = (schema) => {
 	return (req, res, next) => {
 		const keys = Object.keys(schema);
-		// ["body","query"]
-		// req.body <=> req["body"]
+
 		let error = false;
 		keys.forEach((key) => {
 			const result = joi.object(schema[key]).validate(req[key]);
@@ -15,7 +14,7 @@ const validate = (schema) => {
 
 		if (error) {
 			return res.status(400).json({
-				message: 'invalide data provided',
+				message: '44invalide data provided',
 			});
 		}
 		next();
