@@ -1,222 +1,294 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Divider, message, Input, Drawer } from 'antd';
+import React, { useState, useRef } from 'react';
+import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import ProTable from '@ant-design/pro-table';
+import ProDescriptions from '@ant-design/pro-descriptions';
+//import CreateForm from './components/CreateForm';
+//import UpdateForm from './components/UpdateForm';
+//import { queryRule, updateRule, addRule, removeRule } from './service';
+/**
+ * 添加节点
+ *
+ * @param fields
+ */
 
-import { useLocation } from 'react-router-dom';
+const handleAdd = async (fields) => {
+	const hide = message.loading('正在添加');
 
-import { Table, Input, Button, Popconfirm, Form } from 'antd';
-const EditableContext = React.createContext(null);
+	try {
+		await addRule({ ...fields });
+		hide();
+		message.success('添加成功');
+		return true;
+	} catch (error) {
+		hide();
+		message.error('添加失败请重试！');
+		return false;
+	}
+};
+/**
+ * 更新节点
+ *
+ * @param fields
+ */
 
-const EditableRow = ({ index, ...props }) => {
-	const [form] = Form.useForm();
+const handleUpdate = async (fields) => {
+	const hide = message.loading('正在配置');
+
+	try {
+		await updateRule({
+			name: fields.name,
+			desc: fields.desc,
+			key: fields.key,
+		});
+		hide();
+		message.success('配置成功');
+		return true;
+	} catch (error) {
+		hide();
+		message.error('配置失败请重试！');
+		return false;
+	}
+};
+/**
+ * 删除节点
+ *
+ * @param selectedRows
+ */
+
+const handleRemove = async (selectedRows) => {
+	const hide = message.loading('正在删除');
+	if (!selectedRows) return true;
+
+	try {
+		await removeRule({
+			key: selectedRows.map((row) => row.key),
+		});
+		hide();
+		message.success('删除成功，即将刷新');
+		return true;
+	} catch (error) {
+		hide();
+		message.error('删除失败，请重试');
+		return false;
+	}
+};
+
+const TableList = () => {
+	const [createModalVisible, handleModalVisible] = useState(false);
+	const [updateModalVisible, handleUpdateModalVisible] = useState(false);
+	const [stepFormValues, setStepFormValues] = useState({});
+	const actionRef = useRef();
+	const [row, setRow] = useState();
+	const [selectedRowsState, setSelectedRows] = useState([]);
+	const columns = [
+		{
+			title: '规则名称',
+			dataIndex: 'name',
+			tip: '规则名称是唯一的 key',
+			formItemProps: {
+				rules: [
+					{
+						required: true,
+						message: '规则名称为必填项',
+					},
+				],
+			},
+			render: (dom, entity) => {
+				return <a onClick={() => setRow(entity)}>{dom}</a>;
+			},
+		},
+		{
+			title: '描述',
+			dataIndex: 'desc',
+			valueType: 'textarea',
+		},
+		{
+			title: '服务调用次数',
+			dataIndex: 'callNo',
+			sorter: true,
+			hideInForm: true,
+			renderText: (val) => `${val} 万`,
+		},
+		{
+			title: '状态',
+			dataIndex: 'status',
+			hideInForm: true,
+			valueEnum: {
+				0: {
+					text: '关闭',
+					status: 'Default',
+				},
+				1: {
+					text: '运行中',
+					status: 'Processing',
+				},
+				2: {
+					text: '已上线',
+					status: 'Success',
+				},
+				3: {
+					text: '异常',
+					status: 'Error',
+				},
+			},
+		},
+		{
+			title: '上次调度时间',
+			dataIndex: 'updatedAt',
+			sorter: true,
+			valueType: 'dateTime',
+			hideInForm: true,
+			renderFormItem: (item, { defaultRender, ...rest }, form) => {
+				const status = form.getFieldValue('status');
+
+				if (`${status}` === '0') {
+					return false;
+				}
+
+				if (`${status}` === '3') {
+					return <Input {...rest} placeholder="请输入异常原因！" />;
+				}
+
+				return defaultRender(item);
+			},
+		},
+		{
+			title: '操作',
+			dataIndex: 'option',
+			valueType: 'option',
+			render: (_, record) => [
+				<a
+					onClick={() => {
+						handleUpdateModalVisible(true);
+						setStepFormValues(record);
+					}}
+				>
+					配置
+				</a>,
+				<Divider type="vertical" />,
+				<a href="">订阅警报</a>,
+			],
+		},
+	];
 	return (
-		<Form form={form} component={false}>
-			<EditableContext.Provider value={form}>
-				<tr {...props} />
-			</EditableContext.Provider>
-		</Form>
+		<PageContainer>
+			<ProTable
+				headerTitle="查询表格"
+				actionRef={actionRef}
+				rowKey="key"
+				search={{
+					labelWidth: 120,
+				}}
+				toolBarRender={() => [
+					<Button type="primary" onClick={() => handleModalVisible(true)}>
+						<PlusOutlined /> 新建
+					</Button>,
+				]}
+				request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+				columns={columns}
+				rowSelection={{
+					onChange: (_, selectedRows) => setSelectedRows(selectedRows),
+				}}
+			/>
+			{selectedRowsState?.length > 0 && (
+				<FooterToolbar
+					extra={
+						<div>
+							已选择{' '}
+							<a
+								style={{
+									fontWeight: 600,
+								}}
+							>
+								{selectedRowsState.length}
+							</a>{' '}
+							项&nbsp;&nbsp;
+							<span>
+								服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)} 万
+							</span>
+						</div>
+					}
+				>
+					<Button
+						onClick={async () => {
+							await handleRemove(selectedRowsState);
+							setSelectedRows([]);
+							actionRef.current?.reloadAndRest?.();
+						}}
+					>
+						批量删除
+					</Button>
+					<Button type="primary">批量审批</Button>
+				</FooterToolbar>
+			)}
+			{/*	<CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
+				<ProTable
+					onSubmit={async (value) => {
+						const success = await handleAdd(value);
+
+						if (success) {
+							handleModalVisible(false);
+
+							if (actionRef.current) {
+								actionRef.current.reload();
+							}
+						}
+					}}
+					rowKey="key"
+					type="form"
+					columns={columns}
+				/>
+			</CreateForm>*/}
+			{stepFormValues && Object.keys(stepFormValues).length
+				? /*	<UpdateForm
+					onSubmit={async (value) => {
+						const success = await handleUpdate(value);
+
+						if (success) {
+							handleUpdateModalVisible(false);
+							setStepFormValues({});
+
+							if (actionRef.current) {
+								actionRef.current.reload();
+							}
+						}
+					}}
+					onCancel={() => {
+						handleUpdateModalVisible(false);
+						setStepFormValues({});
+					}}
+					updateModalVisible={updateModalVisible}
+					values={stepFormValues}
+				/>*/
+				  ''
+				: null}
+
+			<Drawer
+				width={600}
+				visible={!!row}
+				onClose={() => {
+					setRow(undefined);
+				}}
+				closable={false}
+			>
+				{row?.name && (
+					<ProDescriptions
+						column={2}
+						title={row?.name}
+						request={async () => ({
+							data: row || {},
+						})}
+						params={{
+							id: row?.name,
+						}}
+						columns={columns}
+					/>
+				)}
+			</Drawer>
+		</PageContainer>
 	);
 };
 
-const EditableCell = ({ title, editable, children, dataIndex, record, handleSave, ...restProps }) => {
-	const [editing, setEditing] = useState(false);
-	const inputRef = useRef(null);
-	const form = useContext(EditableContext);
-	useEffect(() => {
-		if (editing) {
-			inputRef.current.focus();
-		}
-	}, [editing]);
-
-	const toggleEdit = () => {
-		setEditing(!editing);
-		form.setFieldsValue({
-			[dataIndex]: record[dataIndex],
-		});
-	};
-
-	const save = async () => {
-		try {
-			const values = await form.validateFields();
-			toggleEdit();
-			handleSave({ ...record, ...values });
-		} catch (errInfo) {
-			console.log('Save failed:', errInfo);
-		}
-	};
-
-	let childNode = children;
-
-	if (editable) {
-		childNode = editing ? (
-			<Form.Item
-				style={{
-					margin: 0,
-				}}
-				name={dataIndex}
-				rules={[
-					{
-						required: true,
-						message: `${title} is required.`,
-					},
-				]}
-			>
-				<Input ref={inputRef} onPressEnter={save} onBlur={save} />
-			</Form.Item>
-		) : (
-			<div
-				className="editable-cell-value-wrap"
-				style={{
-					paddingRight: 24,
-				}}
-				onClick={toggleEdit}
-			>
-				{children}
-			</div>
-		);
-	}
-
-	return <td {...restProps}>{childNode}</td>;
-};
-const Data = () => {
-	const location = useLocation();
-	const { data } = location.state;
-	console.log(data);
-};
-class EditableTable extends React.Component {
-	constructor(props) {
-		super(props);
-		this.columns = [
-			{
-				title: 'name',
-				dataIndex: 'name',
-				editable: true,
-			},
-			{
-				title: 'name',
-				dataIndex: 'name',
-
-				editable: true,
-			},
-			{
-				title: 'name',
-				dataIndex: 'name',
-
-				editable: true,
-			},
-			{
-				title: 'name',
-				dataIndex: 'name',
-
-				editable: true,
-			},
-			{
-				title: 'age',
-				dataIndex: 'age',
-				editable: true,
-			},
-			{
-				title: 'address',
-				dataIndex: 'address',
-				editable: true,
-			},
-			{
-				title: 'operation',
-				dataIndex: 'operation',
-				render: (_, record) =>
-					this.state.dataSource.length >= 1 ? (
-						<Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-							<a href="f">Delete</a>
-						</Popconfirm>
-					) : null,
-			},
-		];
-		this.state = {
-			dataSource: [
-				{
-					key: '0',
-					name: 'enter name ',
-					age: 'enter ',
-					address: '',
-				},
-			],
-			count: 0,
-		};
-	}
-
-	handleDelete = (key) => {
-		const dataSource = [...this.state.dataSource];
-		this.setState({
-			dataSource: dataSource.filter((item) => item.key !== key),
-		});
-	};
-	handleAdd = () => {
-		const { count, dataSource } = this.state;
-		const newData = {
-			key: count,
-			name: '',
-			age: '',
-			address: '',
-		};
-		this.setState({
-			dataSource: [...dataSource, newData],
-			count: count + 1,
-		});
-	};
-	handleSave = (row) => {
-		const newData = [...this.state.dataSource];
-		const index = newData.findIndex((item) => row.key === item.key);
-		const item = newData[index];
-		newData.splice(index, 1, { ...item, ...row });
-		this.setState({
-			dataSource: newData,
-		});
-	};
-
-	render() {
-		const { dataSource } = this.state;
-		const components = {
-			body: {
-				row: EditableRow,
-				cell: EditableCell,
-			},
-		};
-		const columns = this.columns.map((col) => {
-			if (!col.editable) {
-				return col;
-			}
-
-			return {
-				...col,
-				onCell: (record) => ({
-					record,
-					editable: col.editable,
-					dataIndex: col.dataIndex,
-					title: col.title,
-					handleSave: this.handleSave,
-				}),
-			};
-		});
-		return (
-			<div>
-				<h1>dprh:{() => Data()}</h1>
-				<Button
-					onClick={this.handleAdd}
-					type="primary"
-					style={{
-						marginBottom: 16,
-					}}
-				>
-					Add a row
-				</Button>
-				<Table
-					components={components}
-					rowClassName={() => 'editable-row'}
-					bordered
-					dataSource={dataSource}
-					columns={columns}
-				/>
-				<Button type="primary"> Submit</Button>
-			</div>
-		);
-	}
-}
-export default EditableTable;
+export default TableList;

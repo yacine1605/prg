@@ -1,13 +1,19 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
+import { Layout } from 'antd';
+
+import { Typography } from 'antd';
+
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-/*import styles from '../style.less';*/
+import styles from '../Table/style.less';
 
 const TableForm = ({ value, onChange }) => {
+	const { Header, Footer, Content } = Layout;
+	const { Title } = Typography;
 	const [clickedCancel, setClickedCancel] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [index, setIndex] = useState(0);
@@ -48,7 +54,7 @@ const TableForm = ({ value, onChange }) => {
 		const newData = data?.map((item) => ({ ...item })) || [];
 		newData.push({
 			key: `NEW_TEMP_ID_${index}`,
-			/*date: '',
+			date: '',
 			Production: '',
 			P_Consommation_moy: '',
 			nom: '',
@@ -57,7 +63,7 @@ const TableForm = ({ value, onChange }) => {
 			P_Debarquement_min: '',
 			P_Debarquement_moy: '',
 			P_Debarquement_max: '',
-			P_Consommation_min: '',*/
+			P_Consommation_min: '',
 			editable: true,
 			isNew: true,
 		});
@@ -109,7 +115,18 @@ const TableForm = ({ value, onChange }) => {
 
 			const target = getRowByKey(key) || {};
 
-			if (!target.workId || !target.name || !target.department) {
+			if (
+				!target.date ||
+				!target.Production ||
+				!target.P_Consommation_moy ||
+				!target.nom ||
+				!target.P_Consommation_max ||
+				!target.P_Debarquement_moy ||
+				!target.Destinastion ||
+				!target.P_Debarquement_min ||
+				!target.P_Debarquement_max ||
+				!target.P_Consommation_min
+			) {
 				message.error('请填写完整成员信息。');
 				e.target.focus();
 				setLoading(false);
@@ -162,7 +179,7 @@ const TableForm = ({ value, onChange }) => {
 
 	const columns = [
 		{
-			title: 'date',
+			title: <Title level={5}>Date</Title>,
 			dataIndex: 'date',
 			key: 'date',
 
@@ -170,6 +187,7 @@ const TableForm = ({ value, onChange }) => {
 				if (record.editable) {
 					return (
 						<Input
+							style={{ fontSize: 12 }}
 							type="date"
 							autoFocus
 							/*	onChange={(e) => handleFieldChange(e, 'date', record.key)}*/
@@ -184,7 +202,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'Nom poission',
+			title: <Title level={5}>poission</Title>,
 			dataIndex: 'nom',
 			key: 'nom',
 
@@ -198,8 +216,9 @@ const TableForm = ({ value, onChange }) => {
 							placeholder="工号"
 						/>*/
 						<Select
+							styles={{ fontSize: '20' }}
 							options={poission}
-							placeholder="Nom poission"
+							placeholder="poission"
 							value={text}
 							name="poission"
 							onChange={(choice) => handelchoice(choice)}
@@ -210,7 +229,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'production',
+			title: <Title level={5}>production</Title>,
 			dataIndex: 'Production',
 			key: 'Production',
 
@@ -220,6 +239,7 @@ const TableForm = ({ value, onChange }) => {
 						<Input
 							name="production"
 							value={text}
+							style={{ fontSize: 12 }}
 							onChange={handel}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="Production"
@@ -230,7 +250,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P.Debarquement.min',
+			title: <Title level={5}>P.Debarque.min</Title>,
 			dataIndex: 'P_Debarquement_min',
 			key: 'P_Debarquement_min',
 
@@ -238,11 +258,12 @@ const TableForm = ({ value, onChange }) => {
 				if (record.editable) {
 					return (
 						<Input
+							style={{ fontSize: 12 }}
 							name="P_Debarquement_min"
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
-							placeholder="P.Debarquement.min"
+							placeholder="P.Debarque.min"
 						/>
 					);
 				}
@@ -250,7 +271,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P.Debarquement.moy',
+			title: <Title level={5}>P.Debarque.moy</Title>,
 			dataIndex: 'P_Debarquement_moy',
 			key: 'P_Debarquement_moy',
 
@@ -259,6 +280,7 @@ const TableForm = ({ value, onChange }) => {
 					return (
 						<Input
 							name="P_Debarquement_moy"
+							style={{ fontSize: 12 }}
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -270,7 +292,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P_Debarquement_max',
+			title: <Title level={5}>P_Debarque_max</Title>,
 			dataIndex: 'P_Debarquement_max',
 			key: 'P_Debarquement_max',
 
@@ -279,6 +301,7 @@ const TableForm = ({ value, onChange }) => {
 					return (
 						<Input
 							name="P_Debarquement_max"
+							style={{ fontSize: 12 }}
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -292,7 +315,7 @@ const TableForm = ({ value, onChange }) => {
 		},
 
 		{
-			title: 'P_Consommation_min',
+			title: <Title level={5}>P_Consomma_min</Title>,
 			dataIndex: 'P_Consommation_min',
 			key: 'P_Consommation_min',
 			render: (text, record) => {
@@ -300,6 +323,7 @@ const TableForm = ({ value, onChange }) => {
 					return (
 						<Input
 							name="P_Consommation_min"
+							style={{ fontSize: 12 }}
 							value={text}
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
@@ -312,7 +336,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P_Consommation_moy',
+			title: <Title level={5}>P_Consomma_moy</Title>,
 			dataIndex: 'P_Consommation_moy',
 			key: 'P_Consommation_moy',
 
@@ -325,6 +349,7 @@ const TableForm = ({ value, onChange }) => {
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="P_Consommation_moy"
+							style={{ fontSize: 12 }}
 						/>
 					);
 				}
@@ -333,7 +358,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'P_Consommation_max',
+			title: <Title level={5}>P_Consomma_max</Title>,
 			dataIndex: 'P_Consommation_max',
 			key: 'P_Consommation_max',
 			render: (text, record) => {
@@ -345,6 +370,7 @@ const TableForm = ({ value, onChange }) => {
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="P_Consommation_max"
 							onChange={(e) => handel(e)}
+							style={{ fontSize: 12 }}
 						/>
 					);
 				}
@@ -353,7 +379,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'Destinastion',
+			title: <Title level={5}>Destinastion</Title>,
 			dataIndex: 'Destinastion',
 			key: 'Destinastion',
 			render: (text, record) => {
@@ -365,6 +391,7 @@ const TableForm = ({ value, onChange }) => {
 							onChange={(e) => handel(e)}
 							onKeyPress={(e) => handleKeyPress(e, record.key)}
 							placeholder="Destinastion"
+							style={{ fontSize: 12 }}
 						/>
 					);
 				}
@@ -373,7 +400,7 @@ const TableForm = ({ value, onChange }) => {
 			},
 		},
 		{
-			title: 'option',
+			title: <Title level={5}>option</Title>,
 			key: 'option',
 			render: (text, record) => {
 				if (!!record.editable && loading) {
@@ -424,32 +451,46 @@ const TableForm = ({ value, onChange }) => {
 	];
 	return (
 		<>
-			<Table
-				loading={loading}
-				columns={columns}
-				dataSource={data}
-				pagination={false}
-				rowClassName={(record) => (record.editable ? /* styles.editable */ '' : '')}
-			/>
-			<Button
-				style={{
-					width: '100%',
-					marginTop: 16,
-					marginBottom: 8,
-				}}
-				type="dashed"
-				onClick={newMember}
-			>
-				<PlusOutlined />
-				Ajouter Data
-			</Button>
-			<Button
-				type="primary"
-				onClick={() => setArr([...arr, arr.push(form)], console.log(arr))}
-				onClick={() => postData()}
-			>
-				Submit
-			</Button>
+			<Layout>
+				<Header style={{ width: '105%' }}>header</Header>
+				<Layout style={{ border: '1px solid black' }}>
+					<Content style={{ border: '1px solid black', width: '105%' }}>
+						<div className="table">
+							<Table
+								loading={loading}
+								columns={columns}
+								dataSource={data}
+								size={'small'}
+								pagination={false}
+								rowClassName={(record) => (record.editable ? styles.editable : '')}
+							/>
+						</div>
+						<div className="btn">
+							<Button
+								style={{
+									width: '100%',
+									marginTop: 16,
+									marginBottom: 8,
+								}}
+								type="dashed"
+								onClick={newMember}
+							>
+								<PlusOutlined />
+								Ajouter Data
+							</Button>
+						</div>
+					</Content>
+				</Layout>
+				<Footer>
+					<Button
+						type="primary"
+						onClick={() => setArr([...arr, arr.push(form)], console.log(arr))}
+						onClick={() => postData()}
+					>
+						Submit
+					</Button>
+				</Footer>
+			</Layout>
 		</>
 	);
 };

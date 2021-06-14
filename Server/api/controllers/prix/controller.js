@@ -1,4 +1,3 @@
-const e = require('express');
 const Prix = require('../../../models/prix');
 
 const addData = async (req, res) => {
