@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card } from 'antd';
-//import { useHistory } from 'react-router-dom';
+import { Card, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
 import { TwitterSquareFilled, FacebookFilled, InstagramOutlined } from '@ant-design/icons';
 import './contact.css';
 import fish from '../fish4.svg';
@@ -9,14 +9,17 @@ import fond from '../fond.png';
 const { Meta } = Card;
 
 const Contact = () => {
-	//	const history = useHistory();
+	const history = useHistory();
+
 	return (
 		<div className="all">
 			<div className="body_contact">
 				<div className="logo" style={{ paddingLeft: '1.5%' }}>
 					<img src={fond} alt="logo" />
 				</div>
-
+				<Button type="dashed" onClick={() => history.goBack()}>
+					Accuile
+				</Button>
 				<Card
 					hoverable
 					style={{ width: 240 }}

@@ -78,7 +78,14 @@ const Lay = () => {
 							>
 								Contact
 							</Menu.Item>
-							<Menu.Item key="3">option3</Menu.Item>
+							<Menu.Item
+								key="3"
+								onClick={() => {
+									history.push('/map');
+								}}
+							>
+								Map
+							</Menu.Item>
 							<Menu.Item key="4">option4</Menu.Item>
 						</SubMenu>
 					</Menu>
