@@ -1,8 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { Layout, Menu, Button } from 'antd';
-
 const Accuile = () => {
 	const { Header, Content, Footer } = Layout;
 	const { SubMenu } = Menu;
@@ -10,10 +8,60 @@ const Accuile = () => {
 	return (
 		<div>
 			<Layout>
-				<Header style={{ marginBottom: '10%' }}>
-					<Button type="dashed" onClick={() => history.goBack()}>
-						Retour
-					</Button>
+				<Header
+					style={{
+						width: '105%',
+						marginTop: '1%',
+						marginBottom: '5%',
+					}}
+				>
+					<Menu
+						theme="dark"
+						mode="horizontal"
+						defaultSelectedKeys={['1']}
+						style={{ display: 'flex', justifyContent: 'space-between' }}
+					>
+						<Menu.Item
+							key="1"
+							onClick={() => {
+								history.push('/user');
+							}}
+						>
+							Accueil
+						</Menu.Item>
+						<Menu.Item
+							key="2"
+							onClick={() => {
+								history.push('/fish');
+							}}
+						>
+							Detaile sur Poission
+						</Menu.Item>
+						<Menu.Item
+							key="3"
+							onClick={() => {
+								history.push('/data');
+							}}
+						>
+							Graph
+						</Menu.Item>
+						<Menu.Item
+							key="4"
+							onClick={() => {
+								history.push('/map');
+							}}
+						>
+							Map
+						</Menu.Item>
+						<Menu.Item key="5" style={{ marginLeft: '20%' }}>
+							<Button>Log out </Button>
+						</Menu.Item>
+						<Menu.Item>
+							<Button type="dashed" onClick={() => history.goBack()}>
+								Retour
+							</Button>
+						</Menu.Item>
+					</Menu>
 					header
 				</Header>
 				<Layout>

@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Divider, Input, Popconfirm, Table, message } from 'antd';
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Typography } from 'antd';
 import React, { useState } from 'react';
 import Select from 'react-select';
@@ -292,7 +292,6 @@ const TableForm = ({ value, onChange }) => {
 				return text;
 			},
 		},
-
 		{
 			title: <Title level={5}>production</Title>,
 			dataIndex: 'Production',
@@ -515,13 +514,68 @@ const TableForm = ({ value, onChange }) => {
 		},
 	];
 	return (
-		<>
+		<div>
 			<Layout>
-				<Header style={{ width: '105%', color: 'white' }}>
-					<h1>dprh:{data?.data.dprh}</h1>
-					<h1>dprh:{data?.data.port}</h1>
+				<Header
+					style={{
+						width: '105%',
+						marginTop: '1%',
+						marginBottom: '5%',
+					}}
+				>
+					<Menu
+						theme="dark"
+						mode="horizontal"
+						defaultSelectedKeys={['1']}
+						style={{ display: 'flex', justifyContent: 'space-between' }}
+					>
+						<Menu.Item
+							key="1"
+							onClick={() => {
+								history.push('/user');
+							}}
+						>
+							Accueil
+						</Menu.Item>
+						<Menu.Item
+							key="2"
+							onClick={() => {
+								history.push('/fish');
+							}}
+						>
+							Detaile sur Poission
+						</Menu.Item>
+						<Menu.Item
+							key="3"
+							onClick={() => {
+								history.push('/data');
+							}}
+						>
+							Graph
+						</Menu.Item>
+						<Menu.Item
+							key="4"
+							onClick={() => {
+								history.push('/map');
+							}}
+						>
+							Map
+						</Menu.Item>
+						<Menu.Item key="5" style={{ marginLeft: '20%' }}>
+							<Button>Log out </Button>
+						</Menu.Item>
+					</Menu>
+					<Title level={3} style={{ marginTop: '1.5%' }}>
+						Dprh: {data?.data.dprh}{' '}
+					</Title>
 				</Header>
-				<Layout style={{ border: '1px solid black', width: '105%' }}>
+				<Layout
+					style={{
+						border: '1px solid black',
+						width: '105%',
+						backgroundImage: 'linear-gradient(to top, #a8ff78, #78ffd6)',
+					}}
+				>
 					<Content>
 						<div className="table">
 							<Table
@@ -558,7 +612,7 @@ const TableForm = ({ value, onChange }) => {
 					</Button>
 				</Footer>
 			</Layout>
-		</>
+		</div>
 	);
 };
 

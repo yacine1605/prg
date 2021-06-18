@@ -3,7 +3,7 @@ import Login from './Login/Layout';
 import Fish from './fish/rubish';
 import Graph from './Graph/Accuile';
 import Production from './Graph/Graph2';
-import Accuile from './Accuile/Accuile';
+//import Accuile from './Accuile/Accuile';
 import Contact from './Contact/Contact';
 import Map from './Map/Map2';
 
@@ -16,9 +16,9 @@ const App = () => {
 				<Route exact path="/contact">
 					<Contact />
 				</Route>
-				<Route exact path="/accuile">
+				{/*	<Route exact path="/accuile">
 					<Accuile />
-				</Route>
+				</Route>*/}
 				<Route exact path="/data">
 					<Graph />
 				</Route>

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import { Layout, Menu, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
 import ControlPanel from './Panel';
 import { dataLayer } from './Layer';
 //import './mapbox-gl.css';
@@ -9,6 +11,8 @@ import { updatePercentiles } from './utils';
 //const MAPBOX_TOKEN = 'pk.eyJ1IjoieWFjaW5lMDUxNiIsImEiOiJja21yaDNoMTEwN3B4MnJwYjIyZ25wdWY3In0.9dW7PtxCsAawN5W6JuUmEw'; // Set your mapbox token here
 
 const App = () => {
+	const { Header, Content, Footer, Sider } = Layout;
+	const history = useHistory();
 	const [viewport, setViewport] = useState({
 		latitude: 40,
 		longitude: -100,
@@ -50,6 +54,56 @@ const App = () => {
 
 	return (
 		<>
+			<Header
+				style={{
+					width: '105%',
+					marginTop: '1%',
+					marginBottom: '5%',
+				}}
+			>
+				<Menu
+					theme="dark"
+					mode="horizontal"
+					defaultSelectedKeys={['1']}
+					style={{ display: 'flex', justifyContent: 'space-between' }}
+				>
+					<Menu.Item
+						key="1"
+						onClick={() => {
+							history.push('/user');
+						}}
+					>
+						Accueil
+					</Menu.Item>
+					<Menu.Item
+						key="2"
+						onClick={() => {
+							history.push('/fish');
+						}}
+					>
+						Detaile sur Poission
+					</Menu.Item>
+					<Menu.Item
+						key="3"
+						onClick={() => {
+							history.push('/data');
+						}}
+					>
+						Graph
+					</Menu.Item>
+					<Menu.Item
+						key="4"
+						onClick={() => {
+							history.push('/map');
+						}}
+					>
+						Map
+					</Menu.Item>
+					<Menu.Item key="5" style={{ marginLeft: '20%' }}>
+						<Button>Log out </Button>
+					</Menu.Item>
+				</Menu>
+			</Header>
 			<ReactMapGL
 				{...viewport}
 				width="100%"

@@ -65,11 +65,7 @@ const Page = () => {
 	return (
 		<div>
 			<Layout>
-				<Header>
-					<Button type="dashed" onClick={() => history.goBack()}>
-						retour
-					</Button>
-				</Header>
+				<Header></Header>
 				<Layout>
 					<Content>
 						<Content>{totalJediScore()} </Content>
