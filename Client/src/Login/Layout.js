@@ -59,7 +59,7 @@ const Lay = () => {
 		<div>
 			<Layout>
 				<Header className="site-layout-background" style={{ padding: 0 }}></Header>
-				<Sider width={200} className="site-layout-background" style={{ height: '110vh' }}>
+				<Sider width={200} className="site-layout-background" style={{ height: '113vh' }}>
 					<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
 						<SubMenu key="sub1" icon={<UserOutlined />} title="Menu ">
 							<Menu.Item
@@ -86,15 +86,6 @@ const Lay = () => {
 							>
 								Map
 							</Menu.Item>
-							<Menu.Item
-								key="3"
-								onClick={() => {
-									history.push('/data');
-								}}
-							>
-								Graphs
-							</Menu.Item>
-							<Menu.Item key="4">option4</Menu.Item>
 						</SubMenu>
 					</Menu>
 				</Sider>

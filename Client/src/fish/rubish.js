@@ -97,7 +97,8 @@ const Fish = () => {
 			<div
 				className="thebody"
 				style={{
-					backgroundImage: 'linear-gradient(to bottom, #a8c0ff, #3f2b96)',
+					backgroundImage: 'linear-gradient(to bottom, #c9d6ff, #e2e2e2)',
+					//background:  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 					width: '100%',
 					height: '100vh',
 				}}
@@ -109,25 +110,46 @@ const Fish = () => {
 						defaultSelectedKeys={['1']}
 						style={{
 							display: 'flex',
-							justifyContent: 'space-between',
+							//	justifyContent: 'space-between',
 							width: '100%',
 						}}
 					>
 						<Menu.Item key="1" onClick={() => history.push('/map')}>
 							Accueil
 						</Menu.Item>
-						<Menu.Item key="2" onClick={() => history.goBack()}>
-							<Button>Retour</Button>
+
+						<Menu.Item
+							key="3"
+							onClick={() => {
+								history.push('/map');
+							}}
+						>
+							Map
 						</Menu.Item>
-						<Menu.Item key="3" style={{ marginLeft: '20%' }}>
+						<Menu.Item
+							key="4"
+							onClick={() => {
+								history.push('/data');
+							}}
+						>
+							Graph
+						</Menu.Item>
+						<Menu.Item key="5" style={{ marginLeft: '70%' }} onClick={() => history.push('/')}>
 							<Button>Log out </Button>
 						</Menu.Item>
 					</Menu>
 				</Header>
+				<Button
+					style={{ marginTop: '3%', marginLeft: '20%', backgroundColor: 'white' }}
+					onClick={() => history.goBack()}
+					type="ghost"
+				>
+					Retour
+				</Button>
 				<form
 					style={{
 						display: 'flex',
-						background: ' linear-gradient(to bottom, #a8c0ff, #3f2b96)',
+						background: ' linear-gradient(to bottom, #c9d6ff, #e2e2e2)',
 						justifyContent: 'center',
 						flexDirection: ' row',
 						alignItems: ' center',
@@ -240,14 +262,7 @@ const Fish = () => {
 				</form>
 				<div className="btn-fish">
 					<Button
-						style={{
-							backgroundImage: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%',
-							borderRadius: '20%',
-							paddingTop: '0%',
-							paddingBottom: '0%',
-							paddingRight: '3%',
-							paddingLeft: '3%',
-						}}
+						style={{ marginTop: '8%', marginLeft: '10%' }}
 						onClick={() => {
 							setForm(form);
 							console.log(form);

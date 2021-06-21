@@ -5,7 +5,7 @@ import Graph from './Graph/Accuile';
 import Production from './Graph/Graph2';
 //import Accuile from './Accuile/Accuile';
 import Contact from './Contact/Contact';
-import Map from './Map/Map2';
+import Map from './Map/Map';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 

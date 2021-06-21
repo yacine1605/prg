@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button } from 'antd';
-import { Layout } from 'antd';
 import { Select } from 'antd';
+import { Layout, Menu, Button } from 'antd';
+import Graph from './Graph';
+
 import { useHistory } from 'react-router-dom';
 
 const Page = () => {
@@ -47,25 +48,47 @@ const Page = () => {
 	//			<option value="Oceania">Oceania</option>
 	//		</select>
 	//</div>
-	const gra = () => {
-		const data = [];
-		const config = {
-			data,
-			xField: 'year',
-			yField: 'value',
-			point: {
-				size: 5,
-				shape: 'diamond',
-			},
-		};
-	};
-	//		return <Line {...config}/>;
-	//
 
 	return (
 		<div>
 			<Layout>
-				<Header></Header>
+				<Header>
+					<Menu
+						theme="dark"
+						mode="horizontal"
+						defaultSelectedKeys={['1']}
+						style={{ display: 'flex', justifyContent: 'space-between' }}
+					>
+						<Menu.Item
+							key="1"
+							onClick={() => {
+								history.push('/');
+							}}
+						>
+							Accueil
+						</Menu.Item>
+
+						<Menu.Item
+							key="3"
+							onClick={() => {
+								history.push('/data');
+							}}
+						>
+							Graph
+						</Menu.Item>
+						<Menu.Item
+							key="4"
+							onClick={() => {
+								history.push('/map');
+							}}
+						>
+							Map
+						</Menu.Item>
+						<Menu.Item key="5" style={{ marginLeft: '20%' }}>
+							<Button>Log out </Button>
+						</Menu.Item>
+					</Menu>
+				</Header>
 				<Layout>
 					<Content>
 						<Content>{totalJediScore()} </Content>
@@ -90,7 +113,11 @@ const Page = () => {
 						</div>
 					</Content>
 
-					{region && datas && <Content>grahph</Content>}
+					{region && datas && (
+						<Content>
+							<Graph />
+						</Content>
+					)}
 				</Layout>
 				<Footer>footer</Footer>
 			</Layout>

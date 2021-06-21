@@ -70,7 +70,7 @@ const App = () => {
 					<Menu.Item
 						key="1"
 						onClick={() => {
-							history.push('/user');
+							history.push('/');
 						}}
 					>
 						Accueil
