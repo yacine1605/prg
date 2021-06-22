@@ -170,7 +170,10 @@ const Accuile = () => {
 						</Menu>
 					</Content>
 				</Layout>
-				<Footer style={{ backgroundImage: 'linear-gradient(to bottom, #c9d6ff, #e2e2e2)', marginTop: '35%' }}>
+				<Footer
+					theme="dark"
+					style={{ /*backgroundImage: 'linear-gradient(to bottom, #c9d6ff, #e2e2e2)',*/ marginTop: '35%' }}
+				>
 					footer
 				</Footer>
 			</Layout>

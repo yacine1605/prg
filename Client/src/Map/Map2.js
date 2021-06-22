@@ -1,136 +1,69 @@
-import * as React from 'react';
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import ReactMapGL, { Source, Layer } from 'react-map-gl';
+import MapGL, { Source, Layer } from 'react-map-gl';
+import { useState, useEffect } from 'react';
+import { Marker, Popup } from 'react-map-gl';
 import { Layout, Menu, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
-import ControlPanel from './Panel';
-import { dataLayer } from './Layer';
-//import './mapbox-gl.css';
-import { updatePercentiles } from './utils';
+import axios from 'axios';
 
-//const MAPBOX_TOKEN = 'pk.eyJ1IjoieWFjaW5lMDUxNiIsImEiOiJja21yaDNoMTEwN3B4MnJwYjIyZ25wdWY3In0.9dW7PtxCsAawN5W6JuUmEw'; // Set your mapbox token here
-
-const App = () => {
+import 'mapbox-gl/dist/mapbox-gl.css';
+const Map = () => {
 	const { Header, Content, Footer, Sider } = Layout;
 	const history = useHistory();
+	const [wilaya, setWilaya] = useState();
 	const [viewport, setViewport] = useState({
-		latitude: 40,
-		longitude: -100,
-		zoom: 3,
-		bearing: 0,
-		pitch: 0,
+		width: 'fit',
+		height: '61vh',
+		latitude: 34.885,
+		longitude: 3.1,
+		zoom: 5.6,
 	});
-	const [year, setYear] = useState(2015);
-	const [allData, setAllData] = useState(null);
-	const [hoverInfo, setHoverInfo] = useState(null);
+	var data = [
+		{ code: 'ROU', hdi: 0.811 },
+		{ code: 'RUS', hdi: 0.816 },
+		{ code: 'SRB', hdi: 0.787 },
+		{ code: 'SVK', hdi: 0.855 },
+		{ code: 'SVN', hdi: 0.896 },
+		{ code: 'ESP', hdi: 0.891 },
+		{ code: 'SWE', hdi: 0.933 },
+		{ code: 'CHE', hdi: 0.944 },
+		{ code: 'HRV', hdi: 0.831 },
+		{ code: 'CZE', hdi: 0.888 },
+		{ code: 'DNK', hdi: 0.929 },
+		{ code: 'EST', hdi: 0.871 },
+		{ code: 'FIN', hdi: 0.92 },
+		{ code: 'FRA', hdi: 0.901 },
+	];
+	var matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
 
-	useEffect(() => {
-		fetch('https://raw.githubusercontent.com/uber/react-map-gl/master/examples/.data/us-income.geojson')
-			.then((resp) => resp.json())
-			.then((json) => setAllData(json));
-	}, []);
+	const dataLayer = {
+		id: 'countries-join',
+		type: 'fill',
+		paint: {
+			fill_color: matchExpression,
+		},
+	};
 
-	const onHover = useCallback((event) => {
-		const {
-			features,
-			srcEvent: { offsetX, offsetY },
-		} = event;
-		const hoveredFeature = features && features[0];
-
-		setHoverInfo(
-			hoveredFeature
-				? {
-						feature: hoveredFeature,
-						x: offsetX,
-						y: offsetY,
-				  }
-				: null
-		);
-	}, []);
-
-	const data = useMemo(() => {
-		return allData && updatePercentiles(allData, (f) => f.properties.income[year]);
-	}, [allData, year]);
-
+	data.forEach(function (row) {
+		var green = row['hdi'] * 255;
+		var color = 'rgb(0, ' + green + ', 0)';
+		matchExpression.push(row['code'], color);
+	});
 	return (
-		<>
-			<Header
-				style={{
-					width: '105%',
-					marginTop: '1%',
-					marginBottom: '5%',
-				}}
-			>
-				<Menu
-					theme="dark"
-					mode="horizontal"
-					defaultSelectedKeys={['1']}
-					style={{ display: 'flex', justifyContent: 'space-between' }}
-				>
-					<Menu.Item
-						key="1"
-						onClick={() => {
-							history.push('/');
-						}}
-					>
-						Accueil
-					</Menu.Item>
-					<Menu.Item
-						key="2"
-						onClick={() => {
-							history.push('/fish');
-						}}
-					>
-						Detaile sur Poission
-					</Menu.Item>
-					<Menu.Item
-						key="3"
-						onClick={() => {
-							history.push('/data');
-						}}
-					>
-						Graph
-					</Menu.Item>
-					<Menu.Item
-						key="4"
-						onClick={() => {
-							history.push('/map');
-						}}
-					>
-						Map
-					</Menu.Item>
-					<Menu.Item key="5" style={{ marginLeft: '20%' }}>
-						<Button>Log out </Button>
-					</Menu.Item>
-				</Menu>
-			</Header>
-			<ReactMapGL
-				{...viewport}
-				width="100%"
-				height="100%"
-				mapStyle="mapbox://styles/yacine0516/ckmriqu93245318p12gb4959a"
-				onViewportChange={setViewport}
-				mapboxApiAccessToken={
-					'pk.eyJ1IjoieWFjaW5lMDUxNiIsImEiOiJja21yaDNoMTEwN3B4MnJwYjIyZ25wdWY3In0.9dW7PtxCsAawN5W6JuUmEw'
-				}
-				interactiveLayerIds={['data']}
-				onHover={onHover}
-			>
-				<Source type="geojson" data={data}>
-					<Layer {...dataLayer} />
-				</Source>
-				{hoverInfo && (
-					<div className="tooltip" style={{ left: hoverInfo.x, top: hoverInfo.y }}>
-						<div>State: {hoverInfo.feature.properties.name}</div>
-						<div>Median Household Income: {hoverInfo.feature.properties.value}</div>
-						<div>Percentile: {(hoverInfo.feature.properties.percentile / 8) * 100}</div>
-					</div>
-				)}
-			</ReactMapGL>
-
-			<ControlPanel year={year} onChange={(value) => setYear(value)} />
-		</>
+		<MapGL
+			{...viewport}
+			onViewportChange={(nextViewport) => {
+				setViewport(nextViewport);
+			}}
+			mapboxApiAccessToken={
+				'pk.eyJ1IjoieWFjaW5lMDUxNiIsImEiOiJja21yaDNoMTEwN3B4MnJwYjIyZ25wdWY3In0.9dW7PtxCsAawN5W6JuUmEw'
+			}
+			mapStyle="mapbox://styles/yacine0516/ckmriqu93245318p12gb4959a"
+		>
+			{' '}
+			<Source type="geojson" data={data}>
+				<Layer {...dataLayer} />
+			</Source>
+		</MapGL>
 	);
 };
-
-export default App;
+export default Map;
