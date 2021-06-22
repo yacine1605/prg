@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Line } from '@ant-design/charts';
 const Page = ({ datas, format }) => {
 	const totalJediScore = () => {
@@ -12,17 +12,6 @@ const Page = ({ datas, format }) => {
 			}));
 		console.log(word);
 	};
-	const data = [
-		{ year: '1991', value: datas[0].production },
-		{ year: '1992', value: 300 },
-		{ year: '1993', value: 300 },
-		{ year: '1994', value: 500 },
-		{ year: '1995', value: 409 },
-		{ year: '1996', value: 600 },
-		{ year: '1997', value: 700 },
-		{ year: '1998', value: 900 },
-		{ year: '1999', value: 130 },
-	];
 
 	return (
 		<div>
@@ -33,16 +22,16 @@ const Page = ({ datas, format }) => {
 					.filter((elem) => elem.port === format.port)
 					.map((person) => {
 						const data = [
-							{ year: '1991', value: datas[person]?.production },
-							{ year: '1992', value: datas[person]?.production },
-							{ year: '1993', value: datas[person]?.production },
-							{ year: '1994', value: datas[person]?.production },
-							{ year: '1995', value: datas[person]?.production },
-							{ year: '1996', value: datas[person]?.production },
-							{ year: '1997', value: datas[person]?.production },
-							{ year: '1998', value: datas[person]?.production },
-							{ year: '1999', value: datas[person]?.production },
+							{ year: 2012, value: person.production },
+							{ year: 2013, value: datas[0].production },
+							{ year: 2014, value: datas[1].production },
+							{ year: 2015, value: 400 },
+							{ year: 2017, value: 200 },
+							{ year: 2018, value: 500 },
+							{ year: 2019, value: 300 },
+							{ year: 2020, value: 200 },
 						];
+						//const data = console.log({ production: person.production }); /**/
 
 						const config = {
 							data,
@@ -53,7 +42,7 @@ const Page = ({ datas, format }) => {
 								shape: 'diamond',
 							},
 						};
-						return <Line {...config} />;
+						return <Line {...config} />; /* <h1>{data}</h1>*/
 					})}
 		</div>
 	);
