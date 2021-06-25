@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Line } from '@ant-design/charts';
 import axios from 'axios';
 import { Layout, Menu, Button } from 'antd';
 
 import Select from 'react-select';
 import { useHistory } from 'react-router-dom';
 
-const Dankmemes = () => {
+const DemoLine = () => {
 	const { Header, Content } = Layout;
 	const [format, setForm] = useState('');
 	const history = useHistory();
-	const [chartData, setChartData] = useState([]);
-	const [production, setProduction] = useState([]);
-	const [date, setDate] = useState([]);
+
 	const port = [
 		{ value: 'Beni-saf', name: 'port', label: 'Beni-saf' },
 		{ value: 'Bouzedjar', name: 'port', label: 'Bouzedjar' },
@@ -27,47 +25,56 @@ const Dankmemes = () => {
 		{ value: 'Djinet', name: 'port', label: 'Djinet' },
 		{ value: 'Zemmouri', name: 'port', label: 'Zemmouri' },
 	];
-	const [datas, setData] = useState([]);
-
-	const chart = async () => {
-		let production = [];
-		let date = [];
-		const datas = await axios
+	const [data, setData] = useState([]);
+	const asyncFetch = async () => {
+		await axios
 			.get('http://localhost:5000/prix')
 			.then((res) => {
-				console.log(res);
-				for (const dataObj of res.data.data) {
-					production.push(parseInt(dataObj.production));
-					date.push(dataObj.date);
-				}
-				setChartData({
-					labels: date,
-					datasets: [
-						{
-							label: 'level of thiccness',
-							data: production,
-							backgroundColor: ['rgba(575, 192, 192, 0.6)'],
-							borderWidth: 4,
-						},
-					],
-				});
+				setData(res.data.data);
 			})
-			.catch((err) => {
-				console.log(err);
+			.catch((error) => {
+				console.log('fetch data failed', error);
 			});
-		console.log(production, date);
-		setData(datas);
-		console.log(datas);
 	};
 
 	useEffect(() => {
-		chart();
+		asyncFetch();
+		console.log(data);
 	}, []);
-
 	const handelchoice = (e) => {
 		const intermediateState = { ...format };
 		intermediateState[e.name] = e.value;
 		setForm({ ...intermediateState });
+	};
+	var config = {
+		data: data,
+		padding: 'auto',
+		xField: 'date',
+		yField: 'production',
+		annotations: [
+			{
+				type: 'regionFilter',
+				start: ['min', 'median'],
+				end: ['max', '0'],
+				color: '#F4664A',
+			},
+			{
+				type: 'text',
+				position: ['min', 'median'],
+				content: '中位数',
+				offsetY: -4,
+				style: { textBaseline: 'bottom' },
+			},
+			{
+				type: 'line',
+				start: ['min', 'median'],
+				end: ['max', 'median'],
+				style: {
+					stroke: '#F4664A',
+					lineDash: [2, 2],
+				},
+			},
+		],
 	};
 	return (
 		<div className="App">
@@ -122,52 +129,18 @@ const Dankmemes = () => {
 			</Content>
 			<div>
 				{format &&
-					datas.data.data
+					data &&
+					data
 						.filter((el) => el.nom === 'Sardine')
 						.filter((elem) => elem.port === format.port)
 						.map((person) => {
-							return (
-								<Line
-									data={chartData}
-									options={{
-										responsive: true,
-										title: { text: 'THICCNESS SCALE', display: true },
-										scales: {
-											yAxes: [
-												{
-													ticks: {
-														autoSkip: true,
-														maxTicksLimit: 10,
-														beginAtZero: true,
-													},
-													gridLines: {
-														display: true,
-													},
-												},
-											],
-											xAxes: [
-												{
-													gridLines: {
-														display: true,
-													},
-												},
-											],
-										},
-									}}
-								/>
-							);
+							return <Line {...config} />;
 						})}
 			</div>
 		</div>
 	);
 };
-
-export default Dankmemes;
-/*{format &&
-					hartData
-
-						.filter((elem) => elem.port === format?.port)
-						.filter((el) => el.data.data === 'Sardine')
-						.map((person) => {
-							return <h1>{console.log(format.port)}</h1>;
-						})}	*/
+export default DemoLine;
+//
+//
+//
