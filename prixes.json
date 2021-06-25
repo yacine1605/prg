@@ -1,0 +1,323 @@
+[{
+  "_id": {
+    "$oid": "60c7cd10ef91900208d6716e"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-14",
+  "nom": "Sardine",
+  "production": "1211",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c7cdb0ef91900208d67170"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-15",
+  "nom": "Sardine",
+  "production": "1221",
+  "createdAt": {
+    "$date": "2021-06-14T21:44:16.133Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:44:16.133Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c7cdb0ef91900208d67171"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "oran",
+  "P_Consommation_max": "2000",
+  "P_Consommation_min": "540",
+  "P_Consommation_moy": "200",
+  "P_Debarquement_max": "600",
+  "P_Debarquement_min": "154",
+  "P_Debarquement_moy": "454",
+  "date": "2021-06-16",
+  "nom": "Sardine",
+  "production": "151",
+  "createdAt": {
+    "$date": "2021-06-14T21:44:16.140Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:44:16.140Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c7cdb0ef91900208d67172"
+  },
+  "port": "Bouzedjar",
+  "wilaya": "Ain Temouchent",
+  "Destinastion": "Oran",
+  "P_Consommation_max": "1445",
+  "P_Consommation_min": "1211",
+  "P_Consommation_moy": "1210",
+  "P_Debarquement_max": "1110",
+  "P_Debarquement_min": "12121",
+  "P_Debarquement_moy": "111",
+  "date": "2021-06-24",
+  "nom": "Sardine",
+  "production": "1223",
+  "createdAt": {
+    "$date": "2021-06-14T21:44:16.148Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:44:16.148Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c7cdb0ef91900208d67173"
+  },
+  "port": "Bouzedjar",
+  "wilaya": "Tipaza",
+  "Destinastion": "Tlemcen",
+  "P_Consommation_max": "1110",
+  "P_Consommation_min": "11111",
+  "P_Consommation_moy": "1111",
+  "P_Debarquement_max": "1",
+  "P_Debarquement_min": "1",
+  "P_Debarquement_moy": "212",
+  "date": "2021-06-24",
+  "nom": "Allache\"",
+  "production": "1241",
+  "createdAt": {
+    "$date": "2021-06-14T21:44:16.153Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:44:16.153Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1a435430e7126fc470fd8"
+  },
+  "port": "Beni-saf",
+  "wilaya": "Ain Temouchent",
+  "Destinastion": "12121",
+  "P_Consommation_max": "21212",
+  "P_Consommation_min": "21",
+  "P_Consommation_moy": "21",
+  "P_Debarquement_max": "21",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "21",
+  "date": "2021-06-23",
+  "nom": "Poulpe",
+  "production": "1251",
+  "createdAt": {
+    "$date": "2021-06-22T08:49:57.955Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-22T08:49:57.955Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8d4b18f0522507ea58a"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-17",
+  "nom": "Sardine",
+  "production": "4121",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8d6b18f0522507ea58b"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-14",
+  "nom": "Sardine",
+  "production": "1421",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8d8b18f0522507ea58c"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-18",
+  "nom": "Sardine",
+  "production": "1221",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8dab18f0522507ea58d"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-19",
+  "nom": "Sardine",
+  "production": "1801",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8f7b18f0522507ea58e"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-20",
+  "nom": "Sardine",
+  "production": "1321",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8fab18f0522507ea58f"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-21",
+  "nom": "Sardine",
+  "production": "1451",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8fbb18f0522507ea590"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-22",
+  "nom": "Sardine",
+  "production": "2121",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1b8feb18f0522507ea591"
+  },
+  "port": "Alger",
+  "wilaya": "Alger",
+  "Destinastion": "Alger,Tipaza",
+  "P_Consommation_max": "1000",
+  "P_Consommation_min": "1210",
+  "P_Consommation_moy": "100",
+  "P_Debarquement_max": "50",
+  "P_Debarquement_min": "21",
+  "P_Debarquement_moy": "50",
+  "date": "2021-06-23",
+  "nom": "Sardine",
+  "production": "1621",
+  "createdAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-14T21:41:36.155Z"
+  },
+  "__v": 0
+}]

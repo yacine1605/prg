@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "60c39fcc72f0d121383aaf29"
+  },
+  "date": "2021-06-18",
+  "wilaya": "Ain Temouchent",
+  "port": "Bouzedjar",
+  "nom": "Poulpe",
+  "poids": "31",
+  "taille": "12",
+  "createdAt": {
+    "$date": "2021-06-11T17:39:24.200Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-11T17:39:24.200Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60c3a13572f0d121383aaf2a"
+  },
+  "date": "2021-06-11",
+  "wilaya": "Tipaza",
+  "port": "Bouzedjar",
+  "nom": "Poulpe",
+  "poids": "12",
+  "taille": "413",
+  "createdAt": {
+    "$date": "2021-06-11T17:45:25.801Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-11T17:45:25.801Z"
+  },
+  "__v": 0
+}]
