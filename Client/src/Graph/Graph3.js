@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 const Dankmemes = () => {
 	const { Header, Content } = Layout;
-	const [format, setForm] = useState('');
+	const [format, setForm] = useState([]);
 	const history = useHistory();
 	const [chartData, setChartData] = useState([]);
 	const [production, setProduction] = useState([]);
@@ -37,8 +37,10 @@ const Dankmemes = () => {
 			.then((res) => {
 				console.log(res);
 				for (const dataObj of res.data.data) {
-					production.push(parseInt(dataObj.production));
-					date.push(dataObj.date);
+					if (dataObj.name === format.port) {
+						production.push(parseInt(dataObj.production));
+						date.push(dataObj.date);
+					}
 				}
 				setChartData({
 					labels: date,
@@ -121,42 +123,36 @@ const Dankmemes = () => {
 				</div>
 			</Content>
 			<div>
-				{format &&
-					datas.data.data
-						.filter((el) => el.nom === 'Sardine')
-						.filter((elem) => elem.port === format.port)
-						.map((person) => {
-							return (
-								<Line
-									data={chartData}
-									options={{
-										responsive: true,
-										title: { text: 'THICCNESS SCALE', display: true },
-										scales: {
-											yAxes: [
-												{
-													ticks: {
-														autoSkip: true,
-														maxTicksLimit: 10,
-														beginAtZero: true,
-													},
-													gridLines: {
-														display: true,
-													},
-												},
-											],
-											xAxes: [
-												{
-													gridLines: {
-														display: true,
-													},
-												},
-											],
+				{format && (
+					<Line
+						data={chartData}
+						options={{
+							responsive: true,
+							title: { text: 'THICCNESS SCALE', display: true },
+							scales: {
+								yAxes: [
+									{
+										ticks: {
+											autoSkip: true,
+											maxTicksLimit: 10,
+											beginAtZero: true,
 										},
-									}}
-								/>
-							);
-						})}
+										gridLines: {
+											display: true,
+										},
+									},
+								],
+								xAxes: [
+									{
+										gridLines: {
+											display: true,
+										},
+									},
+								],
+							},
+						}}
+					/>
+				)}
 			</div>
 		</div>
 	);

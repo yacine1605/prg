@@ -2,12 +2,13 @@ import Table from './Table/Form';
 import Login from './Login/Layout';
 import Fish from './fish/rubish';
 import Graph from './Graph/Accuile';
-import Production from './Graph/Graph4';
+import Production from './Graph/Graph';
 //import Accuile from './Accuile/Accuile';
 import Contact from './Contact/Contact';
 import Map from './Map/Map2';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+//import Try from './try/Try';
 
 const App = () => {
 	return (

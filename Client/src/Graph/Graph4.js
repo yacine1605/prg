@@ -46,36 +46,7 @@ const DemoLine = () => {
 		intermediateState[e.name] = e.value;
 		setForm({ ...intermediateState });
 	};
-	var config = {
-		data: data,
-		padding: 'auto',
-		xField: 'date',
-		yField: 'production',
-		annotations: [
-			{
-				type: 'regionFilter',
-				start: ['min', 'median'],
-				end: ['max', '0'],
-				color: '#F4664A',
-			},
-			{
-				type: 'text',
-				position: ['min', 'median'],
-				content: '中位数',
-				offsetY: -4,
-				style: { textBaseline: 'bottom' },
-			},
-			{
-				type: 'line',
-				start: ['min', 'median'],
-				end: ['max', 'median'],
-				style: {
-					stroke: '#F4664A',
-					lineDash: [2, 2],
-				},
-			},
-		],
-	};
+
 	return (
 		<div className="App">
 			<Header>
@@ -131,10 +102,44 @@ const DemoLine = () => {
 				{format &&
 					data &&
 					data
-						.filter((el) => el.nom === 'Sardine')
+						.filter((el) => el.nom === 'Poulpe')
 						.filter((elem) => elem.port === format.port)
-						.map((person) => {
-							return <Line {...config} />;
+						.map((el) => {
+							let config = {
+								data: data,
+								padding: '10Px',
+								xField: 'date',
+								yField: 'production',
+								annotations: [
+									{
+										type: 'regionFilter',
+										start: ['0', '10000'],
+										end: ['max', '0'],
+										color: 'purple',
+									},
+									{
+										type: 'text',
+										position: ['min', 'median'],
+										content: 'hh',
+										offsetY: -4,
+										style: { textBaseline: 'bottom' },
+									},
+									{
+										type: 'line',
+										start: ['min', 'median'],
+										end: ['max', 'median'],
+										style: {
+											stroke: '#F4664A',
+											lineDash: [3, 10],
+										},
+									},
+								],
+							};
+							return (
+								<div>
+									<Line {...config} />
+								</div>
+							);
 						})}
 			</div>
 		</div>
