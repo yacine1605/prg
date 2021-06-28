@@ -6,7 +6,6 @@ import { Typography } from 'antd';
 
 import { useLocation, useHistory } from 'react-router-dom';
 
-import { PageContainer } from '@ant-design/pro-layout';
 import Select from 'react-select';
 import axios from 'axios';
 
@@ -54,18 +53,7 @@ const BasicForm = () => {
 			},
 		},
 	};
-	const submitFormLayout = {
-		wrapperCol: {
-			xs: {
-				span: 24,
-				offset: 0,
-			},
-			sm: {
-				span: 10,
-				offset: 7,
-			},
-		},
-	};
+
 	const poission = [
 		{ value: 'Sardine', name: 'nom', label: 'Sardine' },
 		{ value: 'Poulpe', name: 'nom', label: 'Poulpe' },
