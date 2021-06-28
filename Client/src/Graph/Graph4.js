@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Line } from '@ant-design/charts';
+import { ComposedChart, Area, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Scatter } from 'recharts';
 import axios from 'axios';
 import { Layout, Menu, Button } from 'antd';
 

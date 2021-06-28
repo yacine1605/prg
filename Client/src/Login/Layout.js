@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import { Layout, Menu } from 'antd';
 import {
 	MenuUnfoldOutlined,
@@ -14,7 +15,7 @@ import axios from 'axios';
 import './login.css';
 import { Input, Button, Card, Typography } from 'antd';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const Lay = () => {
@@ -55,13 +56,25 @@ const Lay = () => {
 		setForm({ ...intermediateState });
 	};
 	const [collapsed, setCollapsed] = useState(false);
+	const theme = {
+		color: 'black',
+		height: '100Px',
+		width: '100px',
+	};
 	return (
 		<div>
-			<Layout>
-				<Header className="site-layout-background" style={{ padding: 0 }}></Header>
-				<Sider width={200} className="site-layout-background" style={{ height: '113vh' }}>
-					<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-						<SubMenu key="sub1" icon={<UserOutlined />} title="Menu ">
+			<Layout
+				style={{
+					background: '#D0D5DC',
+					height: '115vh',
+				}}
+			>
+				<Sider
+					className="site-layout-background"
+					//style={{ height: '50vh', backgroundColor: '#C4E8E4' }}
+				>
+					<Menu theme="dark" mode="inline" defaultSelectedKeys={[null]}>
+						<SubMenu key="sub1" icon={<UserOutlined />} title="Menu " style={{ height: '100vh' }}>
 							<Menu.Item
 								key="1"
 								onClick={() => {
@@ -93,9 +106,9 @@ const Lay = () => {
 					className="site-layout"
 					style={{
 						//padding: '0 50px',
-						backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%',
-						height: '100vh',
-						width: '200px',
+						//	backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%',
+						height: '113vh',
+						width: '220px',
 					}}
 				>
 					<div
@@ -103,12 +116,17 @@ const Lay = () => {
 						style={{
 							padding: 24,
 							minHeight: 380,
-							height: '100vh',
+							height: '90vh',
 						}}
 					>
-						<div className="body">
-							<div className="logo" /*style={{ paddingLeft: '3%' }}*/>
-								<img src={fond} alt="logo" width="100%" />
+						<div className="body" style={{ marginTop: 0, marginRight: 0 }}>
+							<div
+								className="logo"
+								style={{
+									marginLeft: '3%',
+								}}
+							>
+								<img src={fond} alt="logo" width="100%" height="300" />
 							</div>
 							<Title level={2} className="title" style={{}}></Title>
 							<div className="FormLogin">
@@ -118,15 +136,33 @@ const Lay = () => {
 											style={{
 												boxShadow: ' rgba(0, 0, 0, 0.35) 0px 5px 15px',
 												backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%',
-												width: '300px',
+												width: '450px',
 												height: '300px',
 											}}
-											title="Login"
-											level={4}
+											title={
+												<Title level={4}>
+													<Text
+														italic
+														style={{
+															display: 'flex',
+															justifyContent: 'center',
+															alignItems: 'center',
+														}}
+													>
+														Login
+													</Text>
+												</Title>
+											}
+											level={5}
 											bordered={true}
 										>
 											<label>
-												<b>Username</b>
+												<b>
+													{' '}
+													<Title level={5} className="title">
+														Username
+													</Title>
+												</b>
 											</label>
 											<Input
 												style={{
@@ -143,7 +179,12 @@ const Lay = () => {
 											/>
 
 											<label htmlFor="psw">
-												<b>Password</b>
+												<b>
+													{' '}
+													<Title level={5} className="title">
+														Password
+													</Title>
+												</b>
 											</label>
 											<Input
 												style={{
@@ -182,7 +223,6 @@ const Lay = () => {
 						</div>
 					</div>
 				</Content>
-				<Footer style={{ textAlign: 'center' }}></Footer>
 			</Layout>
 		</div>
 	);

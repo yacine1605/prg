@@ -103,14 +103,20 @@ const Fish = () => {
 					height: '100vh',
 				}}
 			>
-				<Header>
+				<Header
+					style={{
+						width: '100%',
+						marginBottom: '5%',
+						backgroundColor: '#C4E8E4',
+						boxShadow: 'rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px',
+					}}
+				>
 					<Menu
-						theme="dark"
 						mode="horizontal"
 						defaultSelectedKeys={['1']}
 						style={{
 							display: 'flex',
-							//	justifyContent: 'space-between',
+							backgroundColor: '#C4E8E4',
 							width: '100%',
 						}}
 					>
@@ -140,7 +146,7 @@ const Fish = () => {
 					</Menu>
 				</Header>
 				<Button
-					style={{ marginTop: '3%', marginLeft: '20%', backgroundColor: 'white' }}
+					style={{ marginLeft: '10%', backgroundColor: 'white' }}
 					onClick={() => history.goBack()}
 					type="ghost"
 				>
@@ -149,19 +155,16 @@ const Fish = () => {
 				<form
 					style={{
 						display: 'flex',
-						background: ' linear-gradient(to bottom, #c9d6ff, #e2e2e2)',
 						justifyContent: 'center',
 						flexDirection: ' row',
 						alignItems: ' center',
-						marginTop: '10%',
-						boxShadow:
-							'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px',
+						marginTop: '5%',
 					}}
 				>
 					<div
 						style={{
-							background:
-								'linear-gradient(to right, #00b4db, #0083b0)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+							backgroundColor:
+								'#C4E8E4' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
 							width: ' 15%',
 							border: '1px solid black',
 							padding: '8px',
@@ -181,7 +184,7 @@ const Fish = () => {
 					</div>
 					<div
 						style={{
-							background: 'linear-gradient(to right, #00b4db, #0083b0)',
+							backgroundColor: '#C4E8E4',
 							width: ' 15%',
 							border: '1px solid black',
 							padding: '6px',
@@ -194,7 +197,7 @@ const Fish = () => {
 					</div>
 					<div
 						style={{
-							background: 'linear-gradient(to right, #00b4db, #0083b0)',
+							backgroundColor: '#C4E8E4',
 							width: ' 15%',
 							border: '1px solid black',
 							padding: '6px',
@@ -208,7 +211,7 @@ const Fish = () => {
 					</div>
 					<div
 						style={{
-							background: 'linear-gradient(to right, #00b4db, #0083b0)',
+							backgroundColor: '#C4E8E4',
 							width: ' 15%',
 							border: '1px solid black',
 							padding: '6px',
@@ -222,7 +225,7 @@ const Fish = () => {
 					</div>
 					<div
 						style={{
-							background: 'linear-gradient(to right, #00b4db, #0083b0)',
+							backgroundColor: '#C4E8E4',
 
 							width: ' 15%',
 							border: '1px solid black',
@@ -242,7 +245,7 @@ const Fish = () => {
 					</div>
 					<div
 						style={{
-							background: 'linear-gradient(to right, #00b4db, #0083b0)',
+							backgroundColor: '#C4E8E4',
 							width: ' 15%',
 							border: '1px solid black',
 							padding: '9px',

@@ -17,9 +17,6 @@ const App = () => {
 				<Route exact path="/contact">
 					<Contact />
 				</Route>
-				{/*	<Route exact path="/accuile">
-					<Accuile />
-				</Route>*/}
 				<Route exact path="/data">
 					<Graph />
 				</Route>
