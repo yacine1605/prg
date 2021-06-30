@@ -1,11 +1,8 @@
 import ReactMapGL from 'react-map-gl';
 import { useState, useEffect } from 'react';
 import { Marker, Popup } from 'react-map-gl';
-import { Layout, Menu, Button } from 'antd';
-import { useHistory } from 'react-router-dom';
-
 import axios from 'axios';
-import 'mapbox-gl/dist/mapbox-gl.css';
+
 const Map = () => {
 	const { Header, Content, Footer, Sider } = Layout;
 	const history = useHistory();
@@ -20,12 +17,12 @@ const Map = () => {
 	});
 	const [pop, setPop] = useState({ show: false });
 	useEffect(() => {
-		/*const getData = async () => {
-			const { data } = await axios.get();
+		const getData = async () => {
+			const { data } = await axios.get('https://disease.sh/v3/covid-19/countries');
 			console.log(data);
 			setCountries(data);
 		};
-		getData();*/
+		getData();
 	}, []);
 	return (
 		<div>

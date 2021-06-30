@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
@@ -7,8 +7,19 @@ import {
 	VideoCameraOutlined,
 	UploadOutlined,
 } from '@ant-design/icons';
-
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Buttton from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import MapIcon from '@material-ui/icons/Map';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
 import { useHistory } from 'react-router-dom';
 import fond from '../fond.png';
 import axios from 'axios';
@@ -16,7 +27,6 @@ import './login.css';
 import { Input, Button, Card, Typography } from 'antd';
 
 const { Title, Text } = Typography;
-const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 const Lay = () => {
 	const [form, setForm] = useState({
@@ -57,80 +67,133 @@ const Lay = () => {
 	};
 	const [collapsed, setCollapsed] = useState(false);
 	const theme = {
-		color: 'black',
+		color: 'white',
 		height: '100Px',
 		width: '100px',
+	};
+	const StyledMenu = withStyles({
+		paper: {
+			border: '1px solid #d3d4d5',
+		},
+	})((props) => (
+		<Menu
+			elevation={0}
+			getContentAnchorEl={null}
+			anchorOrigin={{
+				vertical: 'bottom',
+				horizontal: 'center',
+			}}
+			transformOrigin={{
+				vertical: 'top',
+				horizontal: 'center',
+			}}
+			{...props}
+		/>
+	));
+
+	const StyledMenuItem = withStyles((theme) => ({
+		root: {
+			'&:focus': {
+				backgroundColor: theme.palette.primary.main,
+				'& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+					color: theme.palette.common.white,
+				},
+			},
+		},
+	}))(MenuItem);
+	const [anchorEl, setAnchorEl] = useState(null);
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
 	};
 	return (
 		<div>
 			<Layout
 				style={{
 					background: '#D0D5DC',
-					height: '115vh',
+					height: '180vh',
 				}}
 			>
-				<Sider
-					className="site-layout-background"
-					//style={{ height: '50vh', backgroundColor: '#C4E8E4' }}
-				>
-					<Menu theme="dark" mode="inline" defaultSelectedKeys={[null]}>
-						<SubMenu key="sub1" icon={<UserOutlined />} title="Menu " style={{ height: '100vh' }}>
-							<Menu.Item
-								key="1"
-								onClick={() => {
-									history.push('/data');
-								}}
-							>
-								Graphs
-							</Menu.Item>
-							<Menu.Item
-								key="2"
-								onClick={() => {
-									history.push('/contact');
-								}}
-							>
-								Contact
-							</Menu.Item>
-							<Menu.Item
-								key="3"
-								onClick={() => {
-									history.push('/map');
-								}}
-							>
-								Map
-							</Menu.Item>
-						</SubMenu>
-					</Menu>
-				</Sider>
 				<Content
 					className="site-layout"
-					style={{
-						//padding: '0 50px',
-						//	backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%',
-						height: '113vh',
-						width: '220px',
-					}}
+					style={
+						{
+							//padding: '0 50px',
+							//	backgroundImage: ' linear-gradient(to top, #a8edea 0%, #fed6e3 100%',
+						}
+					}
 				>
 					<div
 						className="site-layout-background"
-						style={{
-							padding: 24,
-							minHeight: 380,
-							height: '90vh',
-						}}
+						//style={{
+						//	padding: 24,
+						//	minHeight: 380,
+						//	height: '90vh',
+						//}}
 					>
-						<div className="body" style={{ marginTop: 0, marginRight: 0 }}>
-							<div
-								className="logo"
-								style={{
-									marginLeft: '3%',
-								}}
-							>
-								<img src={fond} alt="logo" width="100%" height="300" />
+						{' '}
+						<div className="body">
+							<div className="logo" style={{ display: 'flex', justifyContent: 'center' }}>
+								<img src={fond} alt="logo" height="400" width="1300" />
 							</div>
-							<Title level={2} className="title" style={{}}></Title>
+							<div>
+								<Title
+									style={{
+										display: 'flex',
+										justifyContent: 'space-around',
+										textShadow: '1px 2px 1px #474747',
+									}}
+								>
+									مرحبا بكم في الموقع
+								</Title>
+								<Buttton
+									style={{
+										paddingRight: '30px',
+										marginLeft: '10%',
+										paddingLeft: '30px',
+									}}
+									aria-controls="customized-menu"
+									aria-haspopup="true"
+									variant="contained"
+									color="primary"
+									onClick={handleClick}
+								>
+									Menu
+								</Buttton>
+								<StyledMenu
+									id="customized-menu"
+									anchorEl={anchorEl}
+									keepMounted
+									open={Boolean(anchorEl)}
+									onClose={() => handleClose()}
+								>
+									<StyledMenuItem>
+										<ListItemIcon>
+											<ShowChartIcon fontSize="small" />
+										</ListItemIcon>
+										<ListItemText primary="Graph" onClick={() => history.push('/data')} />
+									</StyledMenuItem>
+									<StyledMenuItem>
+										<ListItemIcon>
+											<MapIcon fontSize="small" />
+										</ListItemIcon>
+										<ListItemText primary="Map" onClick={() => history.push('/map')} />
+									</StyledMenuItem>
+									<StyledMenuItem>
+										<ListItemIcon>
+											<ContactMailIcon fontSize="small" />
+										</ListItemIcon>
+										<ListItemText primary="Contact" onClick={() => history.push('/contact')} />
+									</StyledMenuItem>
+								</StyledMenu>
+							</div>
+
 							<div className="FormLogin">
-								<form onSubmit={(e) => e.preventDefault()}>
+								<form onSubmit={(e) => e.preventDefault()} style={{ marginTop: '10%' }}>
 									<div className="container">
 										<Card
 											style={{
@@ -202,17 +265,22 @@ const Lay = () => {
 
 											<div>
 												<Button
+													aria-controls="customized-menu"
+													aria-haspopup="true"
+													variant="contained"
+													color="primary"
+													type="primary"
+													onClick={() => {
+														submit();
+													}}
 													style={{
 														marginTop: '10%',
 														display: 'flex',
 														justifyContent: 'center',
 														alignItem: 'center',
 													}}
-													type="primary"
-													onClick={() => {
-														submit();
-													}}
 												>
+													{' '}
 													Login
 												</Button>
 											</div>
