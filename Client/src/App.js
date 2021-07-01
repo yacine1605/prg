@@ -2,7 +2,7 @@ import Table from './Table/Form';
 import Login from './Login/Layout';
 import Fish from './fish/rubish';
 import Graph from './Graph/Accuile';
-import Production from './Graph/Graph4';
+import Production from './Graph/Graph3';
 //import Accuile from './Accuile/Accuile';
 import Contact from './Contact/Contact';
 import Map from './Map/Layer';

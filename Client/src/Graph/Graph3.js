@@ -36,11 +36,12 @@ const Dankmemes = () => {
 			.get('http://localhost:5000/prix')
 			.then((res) => {
 				console.log(res);
-				for (const dataObj of res.data.data) {
-					if (dataObj.name === format.port) {
-						production.push(parseInt(dataObj.production));
-						date.push(dataObj.date);
-					}
+				const newData = format
+					? res.data.data.filter((el) => el.nom === 'Sardine').filter((elem) => elem.port === format.port)
+					: res.data.data;
+				for (const dataObj of newData) {
+					production.push(parseInt(dataObj.production));
+					date.push(dataObj.date);
 				}
 				setChartData({
 					labels: date,
@@ -64,7 +65,7 @@ const Dankmemes = () => {
 
 	useEffect(() => {
 		chart();
-	}, []);
+	}, [format]);
 
 	const handelchoice = (e) => {
 		const intermediateState = { ...format };

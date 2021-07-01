@@ -10,7 +10,7 @@ export default function App() {
 	const { Header, Content } = Layout;
 	const [format, setForm] = useState('');
 	const history = useHistory();
-	const [data, setData] = useState();
+	const [data, setData] = useState([]);
 	const asyncFetch = async () => {
 		await axios
 			.get('http://localhost:5000/prix')
@@ -24,8 +24,12 @@ export default function App() {
 
 	useEffect(() => {
 		asyncFetch();
-		console.log(data);
-	}, []);
+		setData(() => {
+			const newData = data.filter((el) => el.nom === 'Sardine').filter((elem) => elem.port === format.port);
+			console.log('newData', newData);
+			return newData;
+		});
+	}, [format]);
 
 	const port = [
 		{ value: 'Beni-saf', name: 'port', label: 'Beni-saf' },
@@ -104,36 +108,24 @@ export default function App() {
 					></Select>
 				</div>
 			</Content>
-			{format &&
-				data &&
-				data
-					.filter((el) => el.nom === 'Sardine')
-					.filter((elem) => elem.port === format.port)
-					.map((el) => {
-						return (
-							<ComposedChart
-								data={data}
-								width={500}
-								height={400}
-								margin={{
-									top: 20,
-									right: 20,
-									bottom: 20,
-									left: 20,
-								}}
-							>
-								<CartesianGrid stroke="#f5f5f5" />
-								<XAxis dataKey="date" />
-								<YAxis dataKey="production" />
-								<Tooltip />
-								<Legend />
-								<Area type="monotone" dataKey="production" fill="#8884d8" stroke="#8884d8" />
-								<Bar dataKey="P_Debarquement_moy" barSize={20} fill="#413ea0" />
-								<Line type="monotone" dataKey="P_Consommation_moy" stroke="#ff7300" />
-								<Scatter dataKey="Destinastion" fill="red" />
-							</ComposedChart>
-						);
-					})}
+			<ComposedChart
+				data={data}
+				width={500}
+				height={400}
+				margin={{
+					top: 20,
+					right: 20,
+					bottom: 20,
+					left: 20,
+				}}
+			>
+				<CartesianGrid stroke="#f5f5f5" />
+				<XAxis dataKey="date" />
+				<Tooltip />
+				<Legend />
+				<YAxis dataKey="production" />
+				<Area type="monotone" dataKey="production" fill="#8884d8" stroke="#8884d8" />
+			</ComposedChart>
 		</div>
 	);
 }
