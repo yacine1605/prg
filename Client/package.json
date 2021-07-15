@@ -17,6 +17,7 @@
     "auth0-js": "^9.16.2",
     "axios": "^0.21.1",
     "bizcharts": "^4.1.10",
+    "chart.js": "^3.4.0",
     "chokidar": "^3.5.2",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.3",
