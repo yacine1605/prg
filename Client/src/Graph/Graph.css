@@ -1,1 +1,64 @@
 @import '~antd/dist/antd.css';
+.footer2Container {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+}
+.footer3 {
+	background-color: #cbccd1;
+	height: 73px;
+}
+.footer3BlocLinks {
+	margin-bottom: 0.6em;
+}
+.footer3blocShare1 {
+	margin-bottom: 0.6em;
+	flex-shrink: 0;
+}
+.generic2Container {
+	width: 1180px;
+	margin: 0 auto;
+	max-width: 98%;
+	position: relative;
+}
+ul {
+	display: block;
+	list-style-type: disc;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	padding-inline-start: 40px;
+}
+div {
+	display: block;
+}
+.footer3BlocLinks__bloc {
+	display: inline-block;
+}
+.footer3BlocLinks__item {
+	display: inline-block;
+	margin-right: 2.18em;
+}
+.footer3blocShare1 {
+	margin-bottom: 0.6em;
+	flex-shrink: 0;
+}
+.blocShare1__item {
+	display: inline-block;
+}
+.blocShare1__link {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	margin-left: 0.55em;
+}
+.blocShare1__item {
+	display: inline-block;
+}

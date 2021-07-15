@@ -134,7 +134,7 @@ const BasicForm = () => {
 		<div>
 			<div
 				className="bdy"
-				style={{ height: '120vh' }}
+				style={{ height: '140vh' }}
 				/*  content={<FormattedMessage id="formandbasic-form.basic.description" />}*/
 			>
 				<Header
@@ -507,6 +507,61 @@ const BasicForm = () => {
 					</Button>
 				</div>
 			</div>
+			<footer
+				role="contentinfo"
+				style={{
+					//backgroundImage: 'linear-gradient(to bottom, #c9d6ff, #e2e2e2)',
+					backgroundColor: '#CBCCD1',
+					height: '73px',
+					display: 'block',
+				}}
+			>
+				<div className="footer2" style={{ display: 'block' }}>
+					<div class="generic2Container footer2Container">
+						<div class="footer2BlocLinks">
+							<ul class="footer2BlocLinks__bloc">
+								<li class="footer2BlocLinks__item">
+									<a
+										style={{ color: 'black' }}
+										class="footer2BlocLinks__link"
+										href="http://www.dgpa.gov.dz/algerie/FLOT/fl00_genbranch.php?sesid=sealumblh6ueauds6q6vokfhf6&callphp=flpb11_docs.php"
+									>
+										Actualités
+									</a>
+								</li>
+								<li class="footer2BlocLinks__item">
+									<a style={{ color: 'black' }} class="footer2BlocLinks__link" href="/credits">
+										Crédits
+									</a>
+								</li>
+
+								<li class="footer2BlocLinks__item">
+									<a style={{ color: 'black' }} class="footer2BlocLinks__link" href="/plan-du-site">
+										Plan du site
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div style={{ marginRight: '1%', width: '20%' }}>
+							<a href="www.facebook.com/" style={{ color: 'black', fontSize: '20px' }}>
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="www.twitter.com" style={{ color: 'black', fontSize: '20px', paddingLeft: '10%' }}>
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a
+								href="www.instagram.com"
+								style={{ color: 'black', fontSize: '20px', paddingLeft: '10%' }}
+							>
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="www.snapchat.com" style={{ color: 'black', fontSize: '20px', paddingLeft: '10%' }}>
+								<i class="fab fa-snapchat-ghost"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
 		</div>
 	);
 };
